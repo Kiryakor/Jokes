@@ -11,17 +11,17 @@ import UIKit
 class AuthViewController: UIViewController {
 
     //MARK: Var
-    var welcomeImageView: UIImageView!
-    var emailLabel:UILabel!
-    var emailTextField:TextFieldBottonLine!
-    var emailStackView:UIStackView!
-    var passwordLabel:UILabel!
-    var passwordTextField:TextFieldBottonLine!
-    var passwordStackView:UIStackView!
-    var emailButton:UIButton!
-    var appleButton:UIButton!
-    var buttonStackView:UIStackView!
-    var mainStackView:UIStackView!
+    private var welcomeImageView: UIImageView!
+    private var emailLabel:UILabel!
+    private var emailTextField:TextFieldBottonLine!
+    private var emailStackView:UIStackView!
+    private var passwordLabel:UILabel!
+    private var passwordTextField:TextFieldBottonLine!
+    private var passwordStackView:UIStackView!
+    private var emailButton:UIButton!
+    private var appleButton:UIButton!
+    private var buttonStackView:UIStackView!
+    private var mainStackView:UIStackView!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class AuthViewController: UIViewController {
 
 //MARK: Setup
 extension AuthViewController{
-    func setup() {
+    private func setup() {
         //setup welcomeImage
         welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
         view.addSubview(welcomeImageView)

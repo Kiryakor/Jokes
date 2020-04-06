@@ -16,4 +16,14 @@ extension UIImageView{
         self.image = image
         self.contentMode = contentMode
     }
+    
+    func setImage(path:String) {
+        guard let url:URL = URL(string: path) else { return }
+        DispatchQueue.global(qos: .background).async {
+            guard let data:Data = try? Data(contentsOf: url) , let image:UIImage = UIImage(data: data) else { return }
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        }
+    }
 }
