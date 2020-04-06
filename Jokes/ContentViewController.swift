@@ -10,43 +10,53 @@ import UIKit
 
 class ContentViewController: UIViewController {
     
-    //MARK: Var
-    private var bannerView:BannerView!
+    var colorCollectionView: UICollectionView!
+    
+    let infiniteSize = 10000
 
-    //MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpUI()
-        setUpBannerView()
-    }
+    lazy var colorList: [UIColor] = {
+        var colors = [UIColor]()
+        for hue in stride(from: 0, to: 1.0, by: 0.25) {
+            let color = UIColor(hue: CGFloat(hue), saturation: 1, brightness: 1, alpha: 1)
+            colors.append(color)
+        }
+        return colors
+    }()
 
-    private func itemView(at index:Int)->UIImageView {
-        let urls:[String] = ["https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "https://cdn.pixabay.com/photo/2015/12/01/20/28/fall-1072821__340.jpg",
-            "https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-            "https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317__340.jpg",
-            "https://images.unsplash.com/photo-1500622944204-b135684e99fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"]
-        let itemImageView:UIImageView = UIImageView(frame: .zero)
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
-        itemImageView.setImage(path: urls[index])
-        itemImageView.clipsToBounds = true
-        itemImageView.contentMode = .scaleAspectFit
-       
-        return itemImageView
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let midIndexPath = IndexPath(row: infiniteSize / 2, section: 0)
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 0
+        colorCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
+        colorCollectionView.scrollToItem(at: midIndexPath, at: .centeredHorizontally, animated: false)
+        colorCollectionView.dataSource = self
+        colorCollectionView.delegate = self
+        colorCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
+        colorCollectionView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        colorCollectionView.isPagingEnabled = true
+        view.addSubview(colorCollectionView)
     }
 }
 
-//MARK: Setup
-extension ContentViewController{
-    private func setUpUI() {
-        self.view.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.2431372549, blue: 0.3137254902, alpha: 1)
-        bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.height))
-        self.view.addSubview(bannerView)
+    // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath)
+        cell.backgroundColor = colorList[indexPath.row % colorList.count]
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return infiniteSize
     }
     
-    private func setUpBannerView() {
-        bannerView.reloadData(configuration: nil, numberOfItems: 5) { (bannerView, index) -> (UIView) in
-           return self.itemView(at: index)
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height + 7)
     }
 }
+
+

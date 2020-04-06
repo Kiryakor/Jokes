@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED4C80A5243B15360069752F /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4C80A4243B15360069752F /* BannerView.swift */; };
 		EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2264243A4A3100B251DC /* AppDelegate.swift */; };
 		EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2266243A4A3100B251DC /* SceneDelegate.swift */; };
 		EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2268243A4A3100B251DC /* AuthViewController.swift */; };
@@ -24,7 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED4C80A4243B15360069752F /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		EDEF2261243A4A3100B251DC /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEF2264243A4A3100B251DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEF2266243A4A3100B251DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				EDEF2286243A4DF400B251DC /* TextFieldBottonLine.swift */,
-				ED4C80A4243B15360069752F /* BannerView.swift */,
 			);
 			path = "custon View";
 			sourceTree = "<group>";
@@ -203,7 +200,6 @@
 				EDEF2283243A4BC800B251DC /* UIImageView + extention.swift in Sources */,
 				EDEF228B243B063600B251DC /* ContentViewController.swift in Sources */,
 				EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */,
-				ED4C80A5243B15360069752F /* BannerView.swift in Sources */,
 				EDEF2281243A4BB100B251DC /* UILabel + extention.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -22,12 +22,23 @@ class AuthViewController: UIViewController {
     private var appleButton:UIButton!
     private var buttonStackView:UIStackView!
     private var mainStackView:UIStackView!
+    private var emailTap:UITapGestureRecognizer!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor()
         setup()
+        
+        emailTap = UITapGestureRecognizer(target: self, action: #selector(tapp))
+        emailButton.addGestureRecognizer(emailTap)
+    }
+    
+    @objc func tapp(){
+        let content = ContentViewController()
+        content.modalPresentationStyle = .fullScreen
+        content.modalTransitionStyle = .coverVertical
+        present(content,animated: true,completion: nil)
     }
 }
 
