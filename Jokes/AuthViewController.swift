@@ -24,8 +24,6 @@ class AuthViewController: UIViewController {
     private var mainStackView:UIStackView!
     private var emailTap:UITapGestureRecognizer!
     
-    var scrollView:UIScrollView!
-    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,16 +67,13 @@ extension AuthViewController:UITextFieldDelegate{
 //MARK: Setup
 extension AuthViewController{
     private func setup() {
-        scrollView = UIScrollView(frame: view.frame)
-        view.addSubview(scrollView)
-        //setup welcomeImage
         welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
-        scrollView.addSubview(welcomeImageView)
+        view.addSubview(welcomeImageView)
         welcomeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            welcomeImageView.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 16),
-            welcomeImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
-            welcomeImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
+            welcomeImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 16),
+            welcomeImageView.widthAnchor.constraint(equalToConstant: view.frame.width - 32),
+            welcomeImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             welcomeImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
@@ -100,12 +95,12 @@ extension AuthViewController{
         
         //setup main StackView
         mainStackView = UIStackView(arrangedSubviews: [emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
-        scrollView.addSubview(mainStackView)
+        view.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: welcomeImageView.bottomAnchor,constant: 16),
-            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 32),
-            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -32)
+            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 32),
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -32)
         ])
     }
 }
