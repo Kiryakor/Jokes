@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import Alamofire
 
 class ContentViewController: UIViewController {
     
@@ -26,6 +28,19 @@ class ContentViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setup()
+        
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+        
+            let headers: HTTPHeaders = [
+                "Authorization": idToken!,
+                "Accept": "application/json"
+            ]
+
+            AF.request("http://api.dukshtau.tech/api/get_images/1", headers: headers).responseJSON { response in
+                debugPrint(response)
+            }
+        }
     }
 }
 
