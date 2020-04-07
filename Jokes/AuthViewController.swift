@@ -56,7 +56,12 @@ extension AuthViewController:UITextFieldDelegate{
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        self.view.frame.origin.y = 0 - keyboardSize.height + 150
+        //MARK: костыль!! -> исправить на ScrollView -> https://fluffy.es/move-view-when-keyboard-is-shown/
+        if keyboardSize.height + 250 > (view.frame.height - buttonStackView.frame.maxY){
+            self.view.frame.origin.y = 0 - keyboardSize.height + 150
+        }else{
+            self.view.frame.origin.y = 0
+        }
     }
        
     @objc func keyboardWillHide(notification: NSNotification) {
