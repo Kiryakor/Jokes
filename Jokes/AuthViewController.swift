@@ -30,16 +30,12 @@ class AuthViewController: UIViewController {
         view.backgroundColor = .backgroundColor()
         setup()
         
-        emailTap = UITapGestureRecognizer(target: self, action: #selector(tapp))
-        emailButton.addGestureRecognizer(emailTap)
-        
-        passwordTextField.delegate = self
-        emailTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(AuthViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AuthViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func tapp(){
+    //MARK: Function
+    @objc func presentAuthVC(){
         let content = ContentViewController()
         content.modalPresentationStyle = .fullScreen
         content.modalTransitionStyle = .coverVertical
@@ -85,15 +81,19 @@ extension AuthViewController{
         //setup email element
         emailLabel = UILabel(text: "Email", font: .avenir16())
         emailTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor())
+        emailTextField.delegate = self
         emailStackView = UIStackView(arrangedSubviews: [emailLabel,emailTextField], axis: .vertical, spacing: 0)
         
         //setup password element
         passwordLabel = UILabel(text: "Password", font: .avenir16())
         passwordTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor())
+        passwordTextField.delegate = self
         passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,passwordTextField], axis: .vertical, spacing: 0)
         
         //setup button
         emailButton = UIButton(title: "Email", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
+        emailTap = UITapGestureRecognizer(target: self, action: #selector(presentAuthVC))
+        emailButton.addGestureRecognizer(emailTap)
         appleButton = UIButton(title: "Apple", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
         buttonStackView = UIStackView(arrangedSubviews: [emailButton,appleButton], axis: .horizontal, spacing: 16)
         buttonStackView.distribution = .fillEqually

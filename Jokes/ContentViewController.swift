@@ -10,11 +10,10 @@ import UIKit
 
 class ContentViewController: UIViewController {
     
-    var colorCollectionView: UICollectionView!
-    
-    let infiniteSize = 10000
-
-    lazy var colorList: [UIColor] = {
+    //MARK: Var
+    var contentCollectionView: UICollectionView!
+    let infiniteSize = 1000
+    lazy var contentList: [UIColor] = {
         var colors = [UIColor]()
         for hue in stride(from: 0, to: 1.0, by: 0.25) {
             let color = UIColor(hue: CGFloat(hue), saturation: 1, brightness: 1, alpha: 1)
@@ -23,30 +22,19 @@ class ContentViewController: UIViewController {
         return colors
     }()
 
+    //MARK: Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let midIndexPath = IndexPath(row: infiniteSize / 2, section: 0)
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 0
-        colorCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
-        colorCollectionView.scrollToItem(at: midIndexPath, at: .centeredHorizontally, animated: false)
-        colorCollectionView.dataSource = self
-        colorCollectionView.delegate = self
-        colorCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
-        colorCollectionView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-        colorCollectionView.isPagingEnabled = true
-        view.addSubview(colorCollectionView)
+        setup()
     }
 }
 
-    // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath)
-        cell.backgroundColor = colorList[indexPath.row % colorList.count]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = contentList[indexPath.row % contentList.count]
         return cell
     }
 
@@ -59,4 +47,21 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-
+//MARK: Setup
+extension ContentViewController{
+    func setup(){
+        let midIndexPath = IndexPath(row: infiniteSize / 2, section: 0)
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 0
+        contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
+        contentCollectionView.scrollToItem(at: midIndexPath, at: .centeredHorizontally, animated: false)
+        contentCollectionView.dataSource = self
+        contentCollectionView.delegate = self
+        contentCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        contentCollectionView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        contentCollectionView.isPagingEnabled = true
+        view.addSubview(contentCollectionView)
+    }
+}
