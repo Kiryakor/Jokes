@@ -56,7 +56,7 @@ extension AuthViewController:UITextFieldDelegate{
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        self.view.frame.origin.y = 0 - keyboardSize.height
+        self.view.frame.origin.y = 0 - keyboardSize.height + 150
     }
        
     @objc func keyboardWillHide(notification: NSNotification) {
