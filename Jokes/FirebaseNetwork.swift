@@ -12,6 +12,7 @@ import Firebase
 class FirebaseNetwork {
     func createUser(email:String,password:String,complition: @escaping(Bool)->Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            print(error)
             guard let result = result, error == nil else {
                 complition(false)
                 return

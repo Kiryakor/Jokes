@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1058765766916-93977k9t7rgo4buiguq71ta36gfle3er.apps.googleusercontent.com</string>
+	<string>150341968513-2rakn5rneeqvno19gpifrsg4gdst6gg9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1058765766916-93977k9t7rgo4buiguq71ta36gfle3er</string>
+	<string>com.googleusercontent.apps.150341968513-2rakn5rneeqvno19gpifrsg4gdst6gg9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDyAy5UvDdkYHVKa56xf6rpw_9ZEDkHcgE</string>
+	<string>AIzaSyDIpvLWqml0iw3Wf2LOdPDpz2d2hZ4FhPE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1058765766916</string>
+	<string>150341968513</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>kiraykor-project.Jokes</string>
+	<string>com.infinitymeme.app</string>
 	<key>PROJECT_ID</key>
-	<string>jokes-e67bb</string>
+	<string>infinity-meme</string>
 	<key>STORAGE_BUCKET</key>
-	<string>jokes-e67bb.appspot.com</string>
+	<string>infinity-meme.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1058765766916:ios:52be928a75fb5f18e39051</string>
+	<string>1:150341968513:ios:2515492a4807605367e380</string>
 	<key>DATABASE_URL</key>
-	<string>https://jokes-e67bb.firebaseio.com</string>
+	<string>https://infinity-meme.firebaseio.com</string>
 </dict>
 </plist>

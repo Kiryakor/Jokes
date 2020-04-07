@@ -39,7 +39,7 @@ class AuthViewController: UIViewController {
     
     //MARK: Function
     @objc func tapEmailButton(){
-        if !emailTextField.text!.isEmpty && passwordTextField.text!.isEmpty{
+        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
             firebaseNerwork.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
                 if result {
                     self?.presentContentVC()
