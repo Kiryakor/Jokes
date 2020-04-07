@@ -24,6 +24,8 @@ class AuthViewController: UIViewController {
     private var mainStackView:UIStackView!
     private var emailTap:UITapGestureRecognizer!
     
+    var scrollView:UIScrollView!
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,8 @@ class AuthViewController: UIViewController {
         
         passwordTextField.delegate = self
         emailTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(AuthViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AuthViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func tapp(){
@@ -45,25 +49,36 @@ class AuthViewController: UIViewController {
     }
 }
 
-//MARK: UITextFieldDelegate
+//MARK: работа с клавиатурой
 extension AuthViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        self.view.frame.origin.y = 0 - keyboardSize.height
+    }
+       
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
 }
 
 //MARK: Setup
 extension AuthViewController{
     private func setup() {
+        scrollView = UIScrollView(frame: view.frame)
+        view.addSubview(scrollView)
         //setup welcomeImage
         welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
-        view.addSubview(welcomeImageView)
+        scrollView.addSubview(welcomeImageView)
         welcomeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            welcomeImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 16),
-            welcomeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
-            welcomeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16),
+            welcomeImageView.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 16),
+            welcomeImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 16),
+            welcomeImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -16),
             welcomeImageView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
@@ -85,12 +100,12 @@ extension AuthViewController{
         
         //setup main StackView
         mainStackView = UIStackView(arrangedSubviews: [emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
-        view.addSubview(mainStackView)
+        scrollView.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: welcomeImageView.bottomAnchor,constant: 16),
-            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 32),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -32)
+            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor,constant: 32),
+            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor,constant: -32)
         ])
     }
 }
