@@ -32,6 +32,9 @@ class AuthViewController: UIViewController {
         
         emailTap = UITapGestureRecognizer(target: self, action: #selector(tapp))
         emailButton.addGestureRecognizer(emailTap)
+        
+        passwordTextField.delegate = self
+        emailTextField.delegate = self
     }
     
     @objc func tapp(){
@@ -39,6 +42,14 @@ class AuthViewController: UIViewController {
         content.modalPresentationStyle = .fullScreen
         content.modalTransitionStyle = .coverVertical
         present(content,animated: true,completion: nil)
+    }
+}
+
+//MARK: UITextFieldDelegate
+extension AuthViewController:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
