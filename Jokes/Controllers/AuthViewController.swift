@@ -90,6 +90,7 @@ extension AuthViewController:UITextFieldDelegate{
 //MARK: Setup
 extension AuthViewController{
     private func setup() {
+        //setup welcomeImageView
         welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
         view.addSubview(welcomeImageView)
         welcomeImageView.translatesAutoresizingMaskIntoConstraints = false

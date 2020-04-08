@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */; };
 		ED3A2110243DC1D00080BCE5 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A210F243DC1D00080BCE5 /* Server.swift */; };
 		ED64D4E1243CD225009E3EB2 /* cellEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E0243CD225009E3EB2 /* cellEnum.swift */; };
 		ED64D4E3243CDAB6009E3EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */; };
@@ -32,6 +33,7 @@
 		1D79491628339BF9BADDE2CD /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
 		AA4DF4B3C5C3A37FA3956D21 /* Pods-Jokes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.debug.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.debug.xcconfig"; sourceTree = "<group>"; };
 		B71792E2E4975081C0F76294 /* Pods_Jokes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jokes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCVCell.swift; sourceTree = "<group>"; };
 		ED3A210F243DC1D00080BCE5 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		ED64D4E0243CD225009E3EB2 /* cellEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellEnum.swift; sourceTree = "<group>"; };
 		ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				EDEF2268243A4A3100B251DC /* AuthViewController.swift */,
 				EDEF228A243B063600B251DC /* ContentViewController.swift */,
+				ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			files = (
 				EDEF227B243A4AF700B251DC /* UIButton + extention.swift in Sources */,
 				EDEF227F243A4B9C00B251DC /* UIFont + extention.swift in Sources */,
+				ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */,
 				EDEF2285243A4BDB00B251DC /* UIStackView + extention.swift in Sources */,
 				ED64D4E5243CDE26009E3EB2 /* FirebaseNetwork.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,

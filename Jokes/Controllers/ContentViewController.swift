@@ -30,6 +30,7 @@ class ContentViewController: UIViewController {
         server.request()
     }
     
+     //MARK: func
     func prepareList() -> [Int] {
         var list:[Int] = []
         
@@ -47,9 +48,9 @@ class ContentViewController: UIViewController {
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellEnum.contentCV.rawValue, for: indexPath)
-        cell.backgroundColor = .random()
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellEnum.contentCV.rawValue, for: indexPath) as! ContentCVCell
+        cell.setImage(image: #imageLiteral(resourceName: "welcome"))
+        
         if indexPath.row == self.numbers!.count - 1 {
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.page = self.page + 1
@@ -81,7 +82,7 @@ extension ContentViewController{
         contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
-        contentCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellEnum.contentCV.rawValue)
+        contentCollectionView.register(ContentCVCell.self, forCellWithReuseIdentifier: cellEnum.contentCV.rawValue)
         contentCollectionView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
         contentCollectionView.isPagingEnabled = true
         view.addSubview(contentCollectionView)

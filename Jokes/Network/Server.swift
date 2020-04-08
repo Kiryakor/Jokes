@@ -15,7 +15,9 @@ class Server {
     func request(){
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
+            
             guard error == nil , let token = token else { return }
+            
             let headers: HTTPHeaders = [
                 "Token": token,
                 "Accept": "application/json"
@@ -23,7 +25,7 @@ class Server {
             
             AF.request("https://api.dukshtau.tech/api/get_images/2", headers: headers).responseJSON { response in
                 print(response)
-                //debugPrint(response)
+                // debugPrint(response)
             }
         })
     }

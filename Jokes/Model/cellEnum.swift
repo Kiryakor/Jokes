@@ -9,5 +9,5 @@
 import Foundation
 
 enum cellEnum:String {
-    case contentCV = "contentCellCV"
+    case contentCV = "contentCVCell"
 }
