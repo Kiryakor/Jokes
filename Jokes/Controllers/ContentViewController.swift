@@ -14,33 +14,32 @@ class ContentViewController: UIViewController {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
-    let infiniteSize = 100
-    lazy var contentList: [UIColor] = {
-        var colors = [UIColor]()
-        for hue in stride(from: 0, to: 1.0, by: 0.25) {
-            let color = UIColor(hue: CGFloat(hue), saturation: 1, brightness: 1, alpha: 1)
-            colors.append(color)
-        }
-        return colors
-    }()
-
+    let server = Server()
+    let numberOfItemsInAPage = 5
+    var page = 0
+    var numbers:[Int]?
+    
     //MARK: Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setup()
         
-        let currentUser = Auth.auth().currentUser
-        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+        self.numbers = self.prepareList()
+        self.contentCollectionView.reloadData()
         
-            let headers: HTTPHeaders = [
-                "Authorization": idToken!,
-                "Accept": "application/json"
-            ]
-
-            AF.request("http://api.dukshtau.tech/api/get_images/1", headers: headers).responseJSON { response in
-                debugPrint(response)
-            }
+        server.request()
+    }
+    
+    func prepareList() -> [Int] {
+        var list:[Int] = []
+        
+        let lowerIndex = self.page * numberOfItemsInAPage
+        let upperIndex = lowerIndex + numberOfItemsInAPage
+        
+        for number in lowerIndex..<upperIndex {
+            list.append(number)
         }
+        return list
     }
 }
 
@@ -49,12 +48,23 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellEnum.contentCV.rawValue, for: indexPath)
-        cell.backgroundColor = contentList[indexPath.row % contentList.count]
+        cell.backgroundColor = .random()
+
+        if indexPath.row == self.numbers!.count - 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.page = self.page + 1
+                let newList = self.prepareList()
+                self.numbers?.append(contentsOf: newList)
+                self.contentCollectionView.reloadData()
+            }
+        }
+        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return infiniteSize
+        guard let num = self.numbers else { return 0 }
+        return num.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -65,13 +75,10 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 //MARK: Setup
 extension ContentViewController{
     func setup(){
-        let midIndexPath = IndexPath(row: infiniteSize / 2, section: 0)
-        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 0
         contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
-        contentCollectionView.scrollToItem(at: midIndexPath, at: .centeredHorizontally, animated: false)
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
         contentCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellEnum.contentCV.rawValue)
