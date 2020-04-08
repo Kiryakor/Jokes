@@ -11,18 +11,20 @@ import Alamofire
 import Firebase
 
 class Server {
+    
     func request(){
         let currentUser = Auth.auth().currentUser
-        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-        
+        currentUser?.getIDToken(completion: { (token, error) in
+            guard error == nil , let token = token else { return }
             let headers: HTTPHeaders = [
-                "Authorization": idToken!,
+                "Token": token,
                 "Accept": "application/json"
             ]
-
-            AF.request("http://api.dukshtau.tech/api/get_images/1", headers: headers).responseJSON { response in
-                debugPrint(response)
+            
+            AF.request("https://api.dukshtau.tech/api/get_images/2", headers: headers).responseJSON { response in
+                print(response)
+                //debugPrint(response)
             }
-        }
+        })
     }
 }
