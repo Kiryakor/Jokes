@@ -24,9 +24,32 @@ class Server {
             ]
             
             AF.request("https://api.dukshtau.tech/api/get_images/2", headers: headers).responseJSON { response in
-                print(response)
-                // debugPrint(response)
+                debugPrint(response)
+                
+                switch response.result{
+                case .success(let value):
+                    print(value)
+                    guard let arrayData = value as? [Any] else { return }
+                    print(arrayData)
+                case .failure(let error):
+                    print(error)
+                }
             }
         })
+    }
+    
+    //loadImage
+    func loadImage(url:String,complition:@escaping(Data?)->Void) {
+        guard let url = URL(string: url) else {
+            complition(nil)
+            return
+        }
+
+        DispatchQueue.global(qos: .utility).async {
+            let data = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                complition(data)
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
         cell.setImage(image: #imageLiteral(resourceName: "welcome"))
         
         if indexPath.row == self.numbers!.count - 1 {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            DispatchQueue.main.async {
                 self.page = self.page + 1
                 let newList = self.prepareList()
                 self.numbers?.append(contentsOf: newList)

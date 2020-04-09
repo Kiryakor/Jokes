@@ -94,6 +94,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		ED3DB012243EFD93002BBF13 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		ED64D4DF243CD20F009E3EB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,9 +113,9 @@
 		ED64D4E8243CE87C009E3EB2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				ED3DB012243EFD93002BBF13 /* Cell */,
 				EDEF2268243A4A3100B251DC /* AuthViewController.swift */,
 				EDEF228A243B063600B251DC /* ContentViewController.swift */,
-				ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
