@@ -17,7 +17,6 @@ class ContentCVCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .random()
-        
         setup()
     }
     

@@ -41,11 +41,7 @@ class AuthViewController: UIViewController {
     @objc func tapEmailButton(){
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
             firebaseNerwork.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
-                if result {
-                    self?.presentContentVC()
-                }else{
-                    self?.errorTextField()
-                }
+                result ? self?.presentContentVC() : self?.errorTextField()
             }
         }else{
             errorTextField()
@@ -69,7 +65,6 @@ extension AuthViewController:UITextFieldDelegate{
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        //MARK: костыль!! -> исправить на ScrollView -> https://fluffy.es/move-view-when-keyboard-is-shown/
         if keyboardSize.height + 250 > (view.frame.height - buttonStackView.frame.maxY){
             self.view.frame.origin.y = 0 - keyboardSize.height + 150
         }else{

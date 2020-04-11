@@ -11,7 +11,7 @@ import Alamofire
 import Firebase
 
 class Server {
-    
+    //запрос на сервер
     func request(){
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
@@ -22,15 +22,15 @@ class Server {
                 "Token": token,
                 "Accept": "application/json"
             ]
-            
+
             AF.request("https://api.dukshtau.tech/api/get_images/2", headers: headers).responseJSON { response in
                 debugPrint(response)
                 
                 switch response.result{
                 case .success(let value):
                     print(value)
-                    guard let arrayData = value as? [Any] else { return }
-                    print(arrayData)
+                    //guard let arrayData = value as? [Any] else { return }
+                    //print(arrayData)
                 case .failure(let error):
                     print(error)
                 }
