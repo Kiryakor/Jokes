@@ -11,7 +11,7 @@ import UIKit
 class ContentCVCell: UICollectionViewCell {
 
     //MARK: Var
-    var contentImage:UIImageView!
+    var contentImage:ImageScrollView!
     
     //MARK: Lifecycle
     override init(frame: CGRect) {
@@ -26,8 +26,9 @@ class ContentCVCell: UICollectionViewCell {
     
     //MARK: func
     private func setup() {
-        contentImage = UIImageView(image: nil, contentMode: .scaleAspectFit)
+        contentImage = ImageScrollView(frame: self.bounds)
         self.addSubview(contentImage)
+        
         contentImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentImage.topAnchor.constraint(equalTo: self.topAnchor),
@@ -38,6 +39,6 @@ class ContentCVCell: UICollectionViewCell {
     }
     
     func setImage(image:UIImage){
-        contentImage.image = image
+        contentImage.set(image: image)
     }
 }
