@@ -1,18 +1,37 @@
 //
-//  Server.swift
+//  Firebase.swift
 //  Jokes
 //
-//  Created by Кирилл on 08.04.2020.
+//  Created by Кирилл on 07.04.2020.
 //  Copyright © 2020 Кирилл. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import FirebaseAuth
+import FirebaseStorage
 import Alamofire
-import Firebase
 
 class Server {
+    func createUser(email:String,password:String,complition: @escaping(Bool)->Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            guard error == nil else {
+                complition(false)
+                return
+            }
+            complition(true)
+        }
+    }
+    
+    func loadImage(url:String,complition:@escaping(Data)->Void) {
+        let storageRef = Storage.storage().reference(withPath: url)
+        storageRef.getData(maxSize: 4*1024*1024) { (data, error) in
+            guard let data = data, error == nil else { return }
+            complition(data)
+        }
+    }
+    
     //запрос на сервер
-    func request(){
+    func request(complition: @escaping([String])->Void){
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
             
@@ -23,33 +42,16 @@ class Server {
                 "Accept": "application/json"
             ]
 
-            AF.request("https://api.dukshtau.tech/api/get_images/2", headers: headers).responseJSON { response in
-                debugPrint(response)
-                
+            AF.request("https://api.dukshtau.tech/api/get_images/50", headers: headers).responseJSON { response in
+               
                 switch response.result{
                 case .success(let value):
-                    print(value)
-                    //guard let arrayData = value as? [Any] else { return }
-                    //print(arrayData)
+                    guard let arrayData = value as? [String] else { return }
+                    complition(arrayData)
                 case .failure(let error):
                     print(error)
                 }
             }
         })
-    }
-    
-    //loadImage
-    func loadImage(url:String,complition:@escaping(Data?)->Void) {
-        guard let url = URL(string: url) else {
-            complition(nil)
-            return
-        }
-
-        DispatchQueue.global(qos: .utility).async {
-            let data = try? Data(contentsOf: url)
-            DispatchQueue.main.async {
-                complition(data)
-            }
-        }
     }
 }

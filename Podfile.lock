@@ -5,6 +5,9 @@ PODS:
     - FirebaseAuth (~> 6.5.1)
   - Firebase/CoreOnly (6.21.0):
     - FirebaseCore (= 6.6.5)
+  - Firebase/Storage (6.21.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 3.6.0)
   - FirebaseAuth (6.5.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.6)
@@ -24,6 +27,10 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseStorage (3.6.0):
+    - FirebaseAuthInterop (~> 1.1)
+    - FirebaseCore (~> 6.6)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleDataTransport (5.1.0)
   - GoogleDataTransportCCTSupport (2.0.1):
     - GoogleDataTransport (~> 5.1)
@@ -52,6 +59,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Auth
+  - Firebase/Storage
 
 SPEC REPOS:
   trunk:
@@ -62,6 +70,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseStorage
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
@@ -76,12 +85,13 @@ SPEC CHECKSUMS:
   FirebaseCore: 9f495d3afacb7b558711e6218ebb14b1c51b5802
   FirebaseCoreDiagnostics: e9b4cd8ba60dee0f2d13347332e4b7898cca5b61
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseStorage: b43ee271294227e1a3225544b073f3b49b427f46
   GoogleDataTransport: b29a21d813e906014ca16c00897827e40e4a24ab
   GoogleDataTransportCCTSupport: 6f15a89b0ca35d6fa523e1f752ef818588885988
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
 
-PODFILE CHECKSUM: 2baab81ed43b058e58132ce31d332b4a637bcd71
+PODFILE CHECKSUM: d32570f15bf1718d111f5e9aa2a02c1aeec8e7f8
 
 COCOAPODS: 1.9.1

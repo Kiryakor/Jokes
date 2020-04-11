@@ -15,32 +15,22 @@ class ContentViewController: UIViewController {
     //MARK: Var
     var contentCollectionView: UICollectionView!
     let server = Server()
-    let numberOfItemsInAPage = 5
-    var page = 0
-    var numbers:[Int]?
+    var dataList:[String] = []
     
     //MARK: Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setup()
         
-        self.numbers = self.prepareList()
-        self.contentCollectionView.reloadData()
-        
-        server.request()
+        loadData()
     }
     
-     //MARK: func
-    func prepareList() -> [Int] {
-        var list:[Int] = []
-        
-        let lowerIndex = self.page * numberOfItemsInAPage
-        let upperIndex = lowerIndex + numberOfItemsInAPage
-        
-        for number in lowerIndex..<upperIndex {
-            list.append(number)
+    //MARK:
+    func loadData(){
+        server.request { [weak self](data) in
+            self?.dataList += data
+            self?.contentCollectionView.reloadData()
         }
-        return list
     }
 }
 
@@ -49,23 +39,21 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
-        cell.setImage(image: #imageLiteral(resourceName: "welcome"))
         
-        if indexPath.row == self.numbers!.count - 1 {
-            DispatchQueue.main.async {
-                self.page = self.page + 1
-                let newList = self.prepareList()
-                self.numbers?.append(contentsOf: newList)
-                self.contentCollectionView.reloadData()
-            }
+        server.loadImage(url: dataList[indexPath.row]) { (data) in
+            let image = UIImage(data: data)
+            cell.setImage(image: image!)
+        }
+        
+        if indexPath.row == dataList.count - 4 {
+            loadData()
         }
         
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let num = self.numbers else { return 0 }
-        return num.count
+        return dataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

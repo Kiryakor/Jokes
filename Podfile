@@ -6,6 +6,7 @@ target 'Jokes' do
   use_frameworks!
 pod 'Alamofire'
 pod 'Firebase/Auth'
+pod 'Firebase/Storage'
   # Pods for Jokes
 
 end

@@ -25,7 +25,7 @@ class AuthViewController: UIViewController {
     private var mainStackView:UIStackView!
     private var emailTap:UITapGestureRecognizer!
     
-    let firebaseNerwork = FirebaseNetwork()
+    let firebaseNerwork = Server()
     
     //MARK: Lifecycle
     override func viewDidLoad() {

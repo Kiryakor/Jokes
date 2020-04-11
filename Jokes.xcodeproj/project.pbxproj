@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		5F8BB5DD43B913EC4FC3A7A6 /* Pods_Jokes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */; };
 		ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */; };
-		ED3A2110243DC1D00080BCE5 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A210F243DC1D00080BCE5 /* Server.swift */; };
 		ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E0243CD225009E3EB2 /* cellModel.swift */; };
 		ED64D4E3243CDAB6009E3EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */; };
-		ED64D4E5243CDE26009E3EB2 /* FirebaseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E4243CDE26009E3EB2 /* FirebaseNetwork.swift */; };
+		ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E4243CDE26009E3EB2 /* Server.swift */; };
 		ED64D4E7243CDEDF009E3EB2 /* UITextField + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E6243CDEDF009E3EB2 /* UITextField + extention.swift */; };
 		EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB2F3D5244218A00087D73D /* ImageScrollView.swift */; };
 		EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2264243A4A3100B251DC /* AppDelegate.swift */; };
@@ -35,10 +34,9 @@
 		66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jokes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E613E9C47F0FF025C745F933 /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
 		ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCVCell.swift; sourceTree = "<group>"; };
-		ED3A210F243DC1D00080BCE5 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		ED64D4E0243CD225009E3EB2 /* cellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellModel.swift; sourceTree = "<group>"; };
 		ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED64D4E4243CDE26009E3EB2 /* FirebaseNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseNetwork.swift; sourceTree = "<group>"; };
+		ED64D4E4243CDE26009E3EB2 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		ED64D4E6243CDEDF009E3EB2 /* UITextField + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + extention.swift"; sourceTree = "<group>"; };
 		EDB2F3D5244218A00087D73D /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		EDEF2261243A4A3100B251DC /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,8 +88,7 @@
 		ED2D47C2243D3A4200A48523 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				ED64D4E4243CDE26009E3EB2 /* FirebaseNetwork.swift */,
-				ED3A210F243DC1D00080BCE5 /* Server.swift */,
+				ED64D4E4243CDE26009E3EB2 /* Server.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -316,7 +313,7 @@
 				EDEF227F243A4B9C00B251DC /* UIFont + extention.swift in Sources */,
 				ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */,
 				EDEF2285243A4BDB00B251DC /* UIStackView + extention.swift in Sources */,
-				ED64D4E5243CDE26009E3EB2 /* FirebaseNetwork.swift in Sources */,
+				ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,
 				EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */,
 				EDEF2287243A4DF400B251DC /* TextFieldBottonLine.swift in Sources */,
@@ -324,7 +321,6 @@
 				EDEF227D243A4B2900B251DC /* UIColor + extention.swift in Sources */,
 				EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */,
 				EDEF2283243A4BC800B251DC /* UIImageView + extention.swift in Sources */,
-				ED3A2110243DC1D00080BCE5 /* Server.swift in Sources */,
 				EDEF228B243B063600B251DC /* ContentViewController.swift in Sources */,
 				EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */,
 				ED64D4E7243CDEDF009E3EB2 /* UITextField + extention.swift in Sources */,

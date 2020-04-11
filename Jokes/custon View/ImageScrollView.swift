@@ -10,7 +10,7 @@ import UIKit
 
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
-    var imageZoomView: UIImageView!
+    var imageZoomView: UIImageView?
     
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
@@ -35,7 +35,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         imageZoomView?.removeFromSuperview()
         imageZoomView = nil
         imageZoomView = UIImageView(image: image)
-        self.addSubview(imageZoomView)
+        self.addSubview(imageZoomView!)
         
         configurateFor(imageSize: image.size)
     }
@@ -46,20 +46,23 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         setCurrentMaxandMinZoomScale()
         self.zoomScale = self.minimumZoomScale
         
-        self.imageZoomView.addGestureRecognizer(self.zoomingTap)
-        self.imageZoomView.isUserInteractionEnabled = true
+        self.imageZoomView!.addGestureRecognizer(self.zoomingTap)
+        self.imageZoomView!.isUserInteractionEnabled = true
 
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        backgroundColor = .white
         
-        self.centerImage()
+        if imageZoomView != nil {
+            self.centerImage()
+        }
     }
     
     func setCurrentMaxandMinZoomScale() {
         let boundsSize = self.bounds.size
-        let imageSize = imageZoomView.bounds.size
+        let imageSize = imageZoomView!.bounds.size
         
         let xScale = boundsSize.width / imageSize.width
         let yScale = boundsSize.height / imageSize.height
@@ -82,7 +85,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     
     func centerImage() {
         let boundsSize = self.bounds.size
-        var frameToCenter = imageZoomView.frame
+        var frameToCenter = imageZoomView!.frame
         
         if frameToCenter.size.width < boundsSize.width {
             frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2
@@ -96,7 +99,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             frameToCenter.origin.y = 0
         }
         
-        imageZoomView.frame = frameToCenter
+        imageZoomView!.frame = frameToCenter
     }
     
     // gesture
