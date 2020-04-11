@@ -9,5 +9,12 @@
 import Foundation
 
 enum cellEnum:String {
-    case contentCV = "contentCVCell"
+    case contentCV
+}
+
+func cellReturn(cell:cellEnum) -> String{
+    switch cell {
+    case .contentCV:
+        return "contentCVCell"
+    }
 }
