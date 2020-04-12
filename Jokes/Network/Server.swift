@@ -31,7 +31,7 @@ class Server {
     }
     
     //запрос на сервер
-    func request(complition: @escaping([String])->Void){
+    func request(imageCount:Int = 50,complition: @escaping([String])->Void){
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
             
@@ -42,8 +42,7 @@ class Server {
                 "Accept": "application/json"
             ]
 
-            AF.request("https://api.dukshtau.tech/api/get_images/50", headers: headers).responseJSON { response in
-               
+            AF.request("https://api.dukshtau.tech/api/get_images/\(imageCount)", headers: headers).responseJSON { response in
                 switch response.result{
                 case .success(let value):
                     guard let arrayData = value as? [String] else { return }

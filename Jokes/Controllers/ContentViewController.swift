@@ -40,6 +40,9 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         
+        //И вообще убрать данные из этого класса
+        //перекинуть в класс Cell и возвращать +[] или +[String]
+        // indexPath.row передавать
         server.loadImage(url: dataList[indexPath.row]) { (data) in
             let image = UIImage(data: data)
             cell.setImage(image: image!)
