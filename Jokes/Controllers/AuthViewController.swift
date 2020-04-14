@@ -13,19 +13,23 @@ class AuthViewController: UIViewController {
 
     //MARK: Var
     private var welcomeImageView: UIImageView!
+    
     private var emailLabel:UILabel!
     private var emailTextField:TextFieldBottonLine!
     private var emailStackView:UIStackView!
+    
     private var passwordLabel:UILabel!
     private var passwordTextField:TextFieldBottonLine!
     private var passwordStackView:UIStackView!
+    
     private var emailButton:UIButton!
+    private var emailTap:UITapGestureRecognizer!
     private var appleButton:UIButton!
     private var buttonStackView:UIStackView!
-    private var mainStackView:UIStackView!
-    private var emailTap:UITapGestureRecognizer!
     
-    let firebaseNerwork = Server()
+    private var mainStackView:UIStackView!
+    
+    let server = Server()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -40,16 +44,14 @@ class AuthViewController: UIViewController {
     //MARK: Function
     @objc func tapEmailButton(){
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
-            firebaseNerwork.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
-                result ? self?.presentViewController(vc: ContentViewController()) : self?.errorTextField()
+            server.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
+                if result{
+                    Present().presentViewController(vc: ContentViewController(), complition: { [weak self] (viewController) in
+                        self?.present(viewController,animated: true,completion: nil)
+                    })
+                }else { self?.errorTextField() }
             }
         }else{ errorTextField() }
-    }
-    
-    func presentViewController(vc:UIViewController,modalPresentationStyle:UIModalPresentationStyle = .fullScreen,modalTransitionStyle: UIModalTransitionStyle = .coverVertical) {
-        vc.modalPresentationStyle = modalPresentationStyle
-        vc.modalTransitionStyle = modalTransitionStyle
-        present(vc,animated: true,completion: nil)
     }
 }
 

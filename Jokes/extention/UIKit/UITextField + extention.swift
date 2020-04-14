@@ -9,12 +9,6 @@
 import UIKit
 
 extension UITextField{
-    func checkText() -> String?{
-        if self.text!.isEmpty {
-            return nil
-        }
-        return self.text
-    }
     
     func errorAnimation(){
            let animation = CABasicAnimation(keyPath: "position")

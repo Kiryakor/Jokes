@@ -10,6 +10,7 @@
 		5F8BB5DD43B913EC4FC3A7A6 /* Pods_Jokes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */; };
 		ED3154EA24460F4300A96512 /* UICollectionView + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154E924460F4300A96512 /* UICollectionView + extention.swift */; };
 		ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */; };
+		ED3154EF2446163B00A96512 /* presentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154EE2446163B00A96512 /* presentVC.swift */; };
 		ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */; };
 		ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E0243CD225009E3EB2 /* cellModel.swift */; };
 		ED64D4E3243CDAB6009E3EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */; };
@@ -37,6 +38,7 @@
 		E613E9C47F0FF025C745F933 /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
 		ED3154E924460F4300A96512 /* UICollectionView + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + extention.swift"; sourceTree = "<group>"; };
 		ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout + extention.swift"; sourceTree = "<group>"; };
+		ED3154EE2446163B00A96512 /* presentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presentVC.swift; sourceTree = "<group>"; };
 		ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCVCell.swift; sourceTree = "<group>"; };
 		ED64D4E0243CD225009E3EB2 /* cellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellModel.swift; sourceTree = "<group>"; };
 		ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		ED3154ED2446162800A96512 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				ED3154EE2446163B00A96512 /* presentVC.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
 		ED3DB012243EFD93002BBF13 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		EDEF2263243A4A3100B251DC /* Jokes */ = {
 			isa = PBXGroup;
 			children = (
+				ED3154ED2446162800A96512 /* helpers */,
 				ED64D4DF243CD20F009E3EB2 /* Model */,
 				ED2D47C2243D3A4200A48523 /* Network */,
 				EDEF2289243A55F400B251DC /* custon View */,
@@ -323,6 +334,7 @@
 				ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,
 				EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */,
+				ED3154EF2446163B00A96512 /* presentVC.swift in Sources */,
 				EDEF2287243A4DF400B251DC /* TextFieldBottonLine.swift in Sources */,
 				ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */,
 				ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */,
