@@ -14,6 +14,8 @@ class ContentViewController: UIViewController {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
+    var loadIndicatorView:UIActivityIndicatorView!
+    
     let server = Server()
     var dataList:[String] = []
     
@@ -28,6 +30,7 @@ class ContentViewController: UIViewController {
     func loadData(){
         server.request { [weak self](data) in
             self?.dataList += data
+            self?.loadIndicatorView.stopAnimating()
             self?.contentCollectionView.reloadData()
         }
     }
@@ -60,6 +63,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 //MARK: Setup
 extension ContentViewController{
     func setup(){
+        //CollectionView
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7)
         contentCollectionView = UICollectionView(frame: frame,flowLayout: flowLayout, isPagingEnabled: true)
@@ -67,5 +71,16 @@ extension ContentViewController{
         contentCollectionView.delegate = self
         contentCollectionView.register(ContentCVCell.self, forCellWithReuseIdentifier: cellReturn(cell: .contentCV))
         view.addSubview(contentCollectionView)
+        
+        //ActivityIndicatorView
+        loadIndicatorView = UIActivityIndicatorView()
+        loadIndicatorView.startAnimating()
+        view.addSubview(loadIndicatorView)
+        loadIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        loadIndicatorView.color = .blackColor()
+        NSLayoutConstraint.activate([
+            loadIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 }
