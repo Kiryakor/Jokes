@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import Alamofire
 
 class ContentViewController: UIViewController {
     
@@ -40,14 +38,10 @@ class ContentViewController: UIViewController {
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
-
-        server.loadImage(url: dataList[indexPath.row]) { (data) in
-            cell.setImage(image: UIImage(data: data)!)
-        }
-        
         if indexPath.row == dataList.count - 4 { loadData() }
         
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
+        cell.contentCell(url: dataList[indexPath.row])
         return cell
     }
 

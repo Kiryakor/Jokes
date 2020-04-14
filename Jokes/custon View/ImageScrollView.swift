@@ -142,4 +142,3 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.centerImage()
     }
 }
-

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class AuthViewController: UIViewController {
 
@@ -24,7 +23,7 @@ class AuthViewController: UIViewController {
     
     private var emailButton:UIButton!
     private var emailTap:UITapGestureRecognizer!
-    private var appleButton:UIButton!
+    //private var appleButton:UIButton!
     private var buttonStackView:UIStackView!
     
     private var mainStackView:UIStackView!
@@ -99,8 +98,8 @@ extension AuthViewController{
         emailButton = UIButton(title: "Email", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
         emailTap = UITapGestureRecognizer(target: self, action: #selector(tapEmailButton))
         emailButton.addGestureRecognizer(emailTap)
-        appleButton = UIButton(title: "Apple", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
-        buttonStackView = UIStackView(arrangedSubviews: [emailButton,appleButton], axis: .horizontal, spacing: 16)
+        //appleButton = UIButton(title: "Apple", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
+        buttonStackView = UIStackView(arrangedSubviews: [emailButton], axis: .horizontal, spacing: 16)
         buttonStackView.distribution = .fillEqually
         
         //setup main StackView

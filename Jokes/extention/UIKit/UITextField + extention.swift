@@ -19,5 +19,5 @@ extension UITextField{
            animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 4, y: self.center.y))
            self.layer.add(animation, forKey: "position")
            self.text = nil
-       }
+    }
 }

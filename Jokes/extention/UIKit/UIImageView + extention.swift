@@ -19,7 +19,7 @@ extension UIImageView{
     
     func setImage(path:String) {
         guard let url:URL = URL(string: path) else { return }
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .utility).async {
             guard let data:Data = try? Data(contentsOf: url) , let image:UIImage = UIImage(data: data) else { return }
             DispatchQueue.main.async {
                 self.image = image

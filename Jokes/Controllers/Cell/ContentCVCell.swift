@@ -40,4 +40,10 @@ class ContentCVCell: UICollectionViewCell {
     func setImage(image:UIImage){
         contentImage.set(image: image)
     }
+    
+    func contentCell(url:String){
+        Server().loadImage(url: url) { [weak self] (data) in
+            self?.setImage(image: UIImage(data: data)!)
+        }
+    }
 }
