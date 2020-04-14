@@ -41,18 +41,15 @@ class AuthViewController: UIViewController {
     @objc func tapEmailButton(){
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
             firebaseNerwork.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
-                result ? self?.presentContentVC() : self?.errorTextField()
+                result ? self?.presentViewController(vc: ContentViewController()) : self?.errorTextField()
             }
-        }else{
-            errorTextField()
-        }
+        }else{ errorTextField() }
     }
     
-    func presentContentVC() {
-        let content = ContentViewController()
-        content.modalPresentationStyle = .fullScreen
-        content.modalTransitionStyle = .coverVertical
-        present(content,animated: true,completion: nil)
+    func presentViewController(vc:UIViewController,modalPresentationStyle:UIModalPresentationStyle = .fullScreen,modalTransitionStyle: UIModalTransitionStyle = .coverVertical) {
+        vc.modalPresentationStyle = modalPresentationStyle
+        vc.modalTransitionStyle = modalTransitionStyle
+        present(vc,animated: true,completion: nil)
     }
 }
 
@@ -67,8 +64,6 @@ extension AuthViewController:UITextFieldDelegate{
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         if keyboardSize.height + 250 > (view.frame.height - buttonStackView.frame.maxY){
             self.view.frame.origin.y = 0 - keyboardSize.height + 150
-        }else{
-            self.view.frame.origin.y = 0
         }
     }
        
@@ -87,14 +82,6 @@ extension AuthViewController{
     private func setup() {
         //setup welcomeImageView
         welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
-        view.addSubview(welcomeImageView)
-        welcomeImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            welcomeImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 16),
-            welcomeImageView.widthAnchor.constraint(equalToConstant: view.frame.width - 32),
-            welcomeImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            welcomeImageView.heightAnchor.constraint(equalToConstant: 250)
-        ])
         
         //setup email element
         emailLabel = UILabel(text: "Email", font: .avenir16())
@@ -117,11 +104,12 @@ extension AuthViewController{
         buttonStackView.distribution = .fillEqually
         
         //setup main StackView
-        mainStackView = UIStackView(arrangedSubviews: [emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
+        mainStackView = UIStackView(arrangedSubviews: [welcomeImageView,emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
         view.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: welcomeImageView.bottomAnchor,constant: 16),
+            mainStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -50),
+            mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 32),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -32)
         ])

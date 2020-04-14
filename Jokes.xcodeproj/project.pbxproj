@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F8BB5DD43B913EC4FC3A7A6 /* Pods_Jokes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */; };
+		ED3154EA24460F4300A96512 /* UICollectionView + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154E924460F4300A96512 /* UICollectionView + extention.swift */; };
 		ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */; };
 		ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E0243CD225009E3EB2 /* cellModel.swift */; };
 		ED64D4E3243CDAB6009E3EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */; };
@@ -33,6 +34,7 @@
 		0147E90D38C787D802F0F1BD /* Pods-Jokes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.debug.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.debug.xcconfig"; sourceTree = "<group>"; };
 		66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jokes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E613E9C47F0FF025C745F933 /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
+		ED3154E924460F4300A96512 /* UICollectionView + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + extention.swift"; sourceTree = "<group>"; };
 		ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCVCell.swift; sourceTree = "<group>"; };
 		ED64D4E0243CD225009E3EB2 /* cellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellModel.swift; sourceTree = "<group>"; };
 		ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				EDEF2282243A4BC800B251DC /* UIImageView + extention.swift */,
 				EDEF2284243A4BDB00B251DC /* UIStackView + extention.swift */,
 				ED64D4E6243CDEDF009E3EB2 /* UITextField + extention.swift */,
+				ED3154E924460F4300A96512 /* UICollectionView + extention.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDEF227B243A4AF700B251DC /* UIButton + extention.swift in Sources */,
+				ED3154EA24460F4300A96512 /* UICollectionView + extention.swift in Sources */,
 				EDEF227F243A4B9C00B251DC /* UIFont + extention.swift in Sources */,
 				ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */,
 				EDEF2285243A4BDB00B251DC /* UIStackView + extention.swift in Sources */,

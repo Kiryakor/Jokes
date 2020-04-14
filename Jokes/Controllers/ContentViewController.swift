@@ -39,18 +39,10 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
+
+        server.loadImage(url: dataList[indexPath.row]) { (data) in cell.setImage(image: UIImage(data: data)!) }
         
-        //И вообще убрать данные из этого класса
-        //перекинуть в класс Cell и возвращать +[] или +[String]
-        // indexPath.row передавать
-        server.loadImage(url: dataList[indexPath.row]) { (data) in
-            let image = UIImage(data: data)
-            cell.setImage(image: image!)
-        }
-        
-        if indexPath.row == dataList.count - 4 {
-            loadData()
-        }
+        if indexPath.row == dataList.count - 4 { loadData() }
         
         return cell
     }
@@ -67,15 +59,11 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 //MARK: Setup
 extension ContentViewController{
     func setup(){
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 0
-        contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7), collectionViewLayout: flowLayout)
+        contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7),isPagingEnabled: true)
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
         contentCollectionView.register(ContentCVCell.self, forCellWithReuseIdentifier: cellReturn(cell: .contentCV))
-        contentCollectionView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-        contentCollectionView.isPagingEnabled = true
+        contentCollectionView.backgroundColor = .whiteColor()
         view.addSubview(contentCollectionView)
     }
 }
