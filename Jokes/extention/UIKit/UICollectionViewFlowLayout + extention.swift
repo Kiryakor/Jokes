@@ -11,6 +11,7 @@ import UIKit
 extension UICollectionViewFlowLayout{
     convenience init(scrollDirection:UICollectionView.ScrollDirection,minimumLineSpacing:CGFloat){
         self.init()
+   
         self.scrollDirection = scrollDirection
         self.minimumLineSpacing = minimumLineSpacing
     }

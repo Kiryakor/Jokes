@@ -21,7 +21,6 @@ class ContentViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setup()
-        
         loadData()
     }
     
@@ -62,7 +61,8 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 extension ContentViewController{
     func setup(){
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
-        contentCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7),flowLayout: flowLayout, isPagingEnabled: true)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7)
+        contentCollectionView = UICollectionView(frame: frame,flowLayout: flowLayout, isPagingEnabled: true)
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
         contentCollectionView.register(ContentCVCell.self, forCellWithReuseIdentifier: cellReturn(cell: .contentCV))

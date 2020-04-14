@@ -11,6 +11,7 @@ import UIKit
 extension UIViewController{
     convenience init(modalPresentationStyle:UIModalPresentationStyle,modalTransitionStyle: UIModalTransitionStyle = .coverVertical){
         self.init()
+    
         self.modalPresentationStyle = modalPresentationStyle
         self.modalTransitionStyle = modalTransitionStyle
     }

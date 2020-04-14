@@ -45,7 +45,9 @@ class AuthViewController: UIViewController {
     @objc func tapEmailButton(){
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
             server.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
-                result ? self?.present(ContentViewController(modalPresentationStyle: .fullScreen),animated: true,completion: nil) : self?.errorTextField()
+                if result {
+                    self?.present(ContentViewController(modalPresentationStyle: .fullScreen),animated: true,completion: nil)
+                }else { self?.errorTextField() }
             }
         }else{ errorTextField() }
     }
