@@ -48,7 +48,7 @@ class Server {
                     guard let arrayData = value as? [String] else { return }
                     complition(arrayData)
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
         })

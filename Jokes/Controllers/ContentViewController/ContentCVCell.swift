@@ -11,7 +11,7 @@ import UIKit
 class ContentCVCell: UICollectionViewCell {
 
     //MARK: Var
-    var contentImage:ImageScrollView!
+    var contentImage:ImageScrollView?
     
     //MARK: Lifecycle
     override init(frame: CGRect) {
@@ -26,6 +26,7 @@ class ContentCVCell: UICollectionViewCell {
     //MARK: func
     private func setup() {
         contentImage = ImageScrollView(frame: self.bounds)
+        guard let contentImage = contentImage else { return }
         self.addSubview(contentImage)
         
         contentImage.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +39,7 @@ class ContentCVCell: UICollectionViewCell {
     }
     
     func setImage(image:UIImage){
-        contentImage.set(image: image)
+        contentImage!.set(image: image)
     }
     
     func contentCell(url:String){
@@ -47,7 +48,7 @@ class ContentCVCell: UICollectionViewCell {
                 self?.setImage(image: UIImage(data: data)!)
             }
         }else{
-            contentImage.set(image: #imageLiteral(resourceName: "notInternet"))
+            print("нету интернета")
         }
     }
 }
