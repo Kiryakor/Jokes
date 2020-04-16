@@ -50,7 +50,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height + 7)
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
 }
 
@@ -59,10 +59,11 @@ extension ContentViewController{
     func setup(){
         //CollectionView
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height + 7)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         contentCollectionView = UICollectionView(frame: frame,flowLayout: flowLayout, isPagingEnabled: true)
         contentCollectionView.dataSource = self
         contentCollectionView.delegate = self
+        contentCollectionView.showsHorizontalScrollIndicator = false
         contentCollectionView.register(ContentCVCell.self, forCellWithReuseIdentifier: cellReturn(cell: .contentCV))
         view.addSubview(contentCollectionView)
         

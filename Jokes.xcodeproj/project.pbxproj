@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F8BB5DD43B913EC4FC3A7A6 /* Pods_Jokes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */; };
+		ED11B94F2448972000856AB9 /* RateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11B94E2448972000856AB9 /* RateManager.swift */; };
 		ED3154EA24460F4300A96512 /* UICollectionView + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154E924460F4300A96512 /* UICollectionView + extention.swift */; };
 		ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */; };
 		ED3154F124461B4300A96512 /* UIViewController + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154F024461B4300A96512 /* UIViewController + extention.swift */; };
@@ -36,6 +37,7 @@
 		0147E90D38C787D802F0F1BD /* Pods-Jokes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.debug.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.debug.xcconfig"; sourceTree = "<group>"; };
 		66CF00E3D28B2913679F86EF /* Pods_Jokes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jokes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E613E9C47F0FF025C745F933 /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
+		ED11B94E2448972000856AB9 /* RateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateManager.swift; sourceTree = "<group>"; };
 		ED3154E924460F4300A96512 /* UICollectionView + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + extention.swift"; sourceTree = "<group>"; };
 		ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout + extention.swift"; sourceTree = "<group>"; };
 		ED3154F024461B4300A96512 /* UIViewController + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + extention.swift"; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 				E613E9C47F0FF025C745F933 /* Pods-Jokes.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		ED11B94D244896FC00856AB9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				ED11B94E2448972000856AB9 /* RateManager.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		ED2D47C2243D3A4200A48523 /* Network */ = {
@@ -146,6 +156,7 @@
 		EDEF2263243A4A3100B251DC /* Jokes */ = {
 			isa = PBXGroup;
 			children = (
+				ED11B94D244896FC00856AB9 /* Helpers */,
 				ED64D4DF243CD20F009E3EB2 /* Model */,
 				ED2D47C2243D3A4200A48523 /* Network */,
 				EDEF2289243A55F400B251DC /* custon View */,
@@ -325,6 +336,7 @@
 				EDEF2285243A4BDB00B251DC /* UIStackView + extention.swift in Sources */,
 				ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,
+				ED11B94F2448972000856AB9 /* RateManager.swift in Sources */,
 				EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */,
 				EDEF2287243A4DF400B251DC /* TextFieldBottonLine.swift in Sources */,
 				ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */,
