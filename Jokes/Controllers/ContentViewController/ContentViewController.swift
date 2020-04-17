@@ -22,6 +22,7 @@ class ContentViewController: UIViewController {
         super.viewDidAppear(animated)
         setup()
         loadData()
+        view.backgroundColor = .backgroundColor()
     }
     
     //MARK:

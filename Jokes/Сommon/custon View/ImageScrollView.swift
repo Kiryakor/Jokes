@@ -53,7 +53,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .white
+        backgroundColor = .backgroundColor()
         
         if imageZoomView != nil {
             self.centerImage()

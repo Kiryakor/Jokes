@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if user == nil {
                 self.window?.rootViewController = AuthViewController()
             }else{
-                self.window?.rootViewController = ContentViewController()
+                self.window?.rootViewController = AuthViewController()
             }
         }
         window?.makeKeyAndVisible()

@@ -11,7 +11,7 @@ import UIKit
 class AuthViewController: UIViewController {
 
     //MARK: Var
-    private var welcomeImageView: UIImageView!
+    private var welcomeLabel: UILabel!
     
     private var emailLabel:UILabel!
     private var emailTextField:TextFieldBottonLine!
@@ -23,7 +23,6 @@ class AuthViewController: UIViewController {
     
     private var emailButton:UIButton!
     private var emailTap:UITapGestureRecognizer!
-    //private var appleButton:UIButton!
     private var buttonStackView:UIStackView!
     
     private var mainStackView:UIStackView!
@@ -80,30 +79,31 @@ extension AuthViewController:UITextFieldDelegate{
 extension AuthViewController{
     private func setup() {
         //setup welcomeImageView
-        welcomeImageView = UIImageView(image: #imageLiteral(resourceName: "welcome"), contentMode: .scaleAspectFit)
+        welcomeLabel = UILabel(text: "Infinity meme", font: .avenir32())
+        welcomeLabel.textAlignment = .center
         
         //setup email element
         emailLabel = UILabel(text: "Email", font: .avenir16())
-        emailTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor())
+        emailTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor(),textContentType: .emailAddress)
         emailTextField.delegate = self
         emailStackView = UIStackView(arrangedSubviews: [emailLabel,emailTextField], axis: .vertical, spacing: 0)
         
         //setup password element
         passwordLabel = UILabel(text: "Password", font: .avenir16())
-        passwordTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor())
+        passwordTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor(),textContentType: .password)
         passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
         passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,passwordTextField], axis: .vertical, spacing: 0)
         
         //setup button
         emailButton = UIButton(title: "Email", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
         emailTap = UITapGestureRecognizer(target: self, action: #selector(tapEmailButton))
         emailButton.addGestureRecognizer(emailTap)
-        //appleButton = UIButton(title: "Apple", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
         buttonStackView = UIStackView(arrangedSubviews: [emailButton], axis: .horizontal, spacing: 16)
         buttonStackView.distribution = .fillEqually
         
         //setup main StackView
-        mainStackView = UIStackView(arrangedSubviews: [welcomeImageView,emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
+        mainStackView = UIStackView(arrangedSubviews: [welcomeLabel,emailStackView,passwordStackView,buttonStackView], axis: .vertical, spacing: 32)
         view.addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

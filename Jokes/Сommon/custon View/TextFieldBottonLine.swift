@@ -10,12 +10,13 @@ import UIKit
 
 class TextFieldBottonLine: UITextField {
     
-    convenience init(font: UIFont?, backgroundColor:UIColor) {
+    convenience init(font: UIFont?, backgroundColor:UIColor,textContentType:UITextContentType = .name) {
         self.init()
         
         self.font = font
         self.borderStyle = .none
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.textContentType = textContentType
         
         var bottomView = UIView()
         bottomView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
