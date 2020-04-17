@@ -48,7 +48,10 @@ class Server {
                     guard let arrayData = value as? [String] else { return }
                     complition(arrayData)
                 case .failure(let error):
+                    //неверный формат
                     print(error.localizedDescription)
+                    print(error.isResponseSerializationError)
+                    complition([])
                 }
             }
         })

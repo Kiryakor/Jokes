@@ -24,15 +24,6 @@ class ContentViewController: UIViewController {
         loadData()
         view.backgroundColor = .backgroundColor()
     }
-    
-    //MARK:
-    func loadData(){
-        server.request { [weak self](data) in
-            self?.dataList += data
-            self?.loadIndicatorView.stopAnimating()
-            self?.contentCollectionView.reloadData()
-        }
-    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -78,5 +69,31 @@ extension ContentViewController{
             loadIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             loadIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+}
+
+//MARK: func
+extension ContentViewController{
+    func loadData(){
+        server.request { [weak self](data) in
+            if data.count != 0{
+                self?.loadIndicatorView.stopAnimating()
+                self?.dataList += data
+                self?.contentCollectionView.reloadData()
+            }else{
+                self?.alert()
+            }
+        }
+    }
+    
+    func alert(){
+        let alert = Alert.alertOneAction(titleAlert: nil,
+                                        messageAlert: "Ошибка сервера",
+                                        preferredStyle: .alert,
+                                        titleAction: "Повторить попытку",
+                                        styleAction: .default) { [weak self] (alert) in
+                                            self?.loadData()
+                                        }
+        present(alert,animated:true)
     }
 }

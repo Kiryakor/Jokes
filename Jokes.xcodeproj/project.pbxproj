@@ -19,7 +19,6 @@
 		ED64D4E7243CDEDF009E3EB2 /* UITextField + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E6243CDEDF009E3EB2 /* UITextField + extention.swift */; };
 		EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB2F3D5244218A00087D73D /* ImageScrollView.swift */; };
 		EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3F52A2448DE6400074B94 /* Connectivity.swift */; };
-		EDE3F52D2448E68900074B94 /* NoInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3F52C2448E68900074B94 /* NoInternetView.swift */; };
 		EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2264243A4A3100B251DC /* AppDelegate.swift */; };
 		EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2266243A4A3100B251DC /* SceneDelegate.swift */; };
 		EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2268243A4A3100B251DC /* AuthViewController.swift */; };
@@ -33,6 +32,7 @@
 		EDEF2285243A4BDB00B251DC /* UIStackView + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2284243A4BDB00B251DC /* UIStackView + extention.swift */; };
 		EDEF2287243A4DF400B251DC /* TextFieldBottonLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2286243A4DF400B251DC /* TextFieldBottonLine.swift */; };
 		EDEF228B243B063600B251DC /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF228A243B063600B251DC /* ContentViewController.swift */; };
+		EDF33E76244A075E00D5E499 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF33E75244A075E00D5E499 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +50,6 @@
 		ED64D4E6243CDEDF009E3EB2 /* UITextField + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + extention.swift"; sourceTree = "<group>"; };
 		EDB2F3D5244218A00087D73D /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		EDE3F52A2448DE6400074B94 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
-		EDE3F52C2448E68900074B94 /* NoInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetView.swift; sourceTree = "<group>"; };
 		EDEF2261243A4A3100B251DC /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEF2264243A4A3100B251DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEF2266243A4A3100B251DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		EDEF2284243A4BDB00B251DC /* UIStackView + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + extention.swift"; sourceTree = "<group>"; };
 		EDEF2286243A4DF400B251DC /* TextFieldBottonLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBottonLine.swift; sourceTree = "<group>"; };
 		EDEF228A243B063600B251DC /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		EDF33E75244A075E00D5E499 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +102,7 @@
 			children = (
 				ED11B94E2448972000856AB9 /* RateManager.swift */,
 				EDE3F52A2448DE6400074B94 /* Connectivity.swift */,
+				EDF33E75244A075E00D5E499 /* Alert.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -223,7 +224,6 @@
 			children = (
 				EDEF2286243A4DF400B251DC /* TextFieldBottonLine.swift */,
 				EDB2F3D5244218A00087D73D /* ImageScrollView.swift */,
-				EDE3F52C2448E68900074B94 /* NoInternetView.swift */,
 			);
 			path = "custon View";
 			sourceTree = "<group>";
@@ -351,13 +351,13 @@
 				ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,
 				ED11B94F2448972000856AB9 /* RateManager.swift in Sources */,
+				EDF33E76244A075E00D5E499 /* Alert.swift in Sources */,
 				EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */,
 				EDEF2287243A4DF400B251DC /* TextFieldBottonLine.swift in Sources */,
 				ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */,
 				ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */,
 				EDEF227D243A4B2900B251DC /* UIColor + extention.swift in Sources */,
 				EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */,
-				EDE3F52D2448E68900074B94 /* NoInternetView.swift in Sources */,
 				ED3154F124461B4300A96512 /* UIViewController + extention.swift in Sources */,
 				EDEF2283243A4BC800B251DC /* UIImageView + extention.swift in Sources */,
 				EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */,
