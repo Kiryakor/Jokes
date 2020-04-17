@@ -88,9 +88,9 @@ extension ContentViewController{
     
     func alert(){
         let alert = Alert.alertOneAction(titleAlert: nil,
-                                        messageAlert: "Ошибка сервера",
+                                         messageAlert: "Ошибка сервера".localized,
                                         preferredStyle: .alert,
-                                        titleAction: "Повторить попытку",
+                                        titleAction: "Повторить попытку".localized,
                                         styleAction: .default) { [weak self] (alert) in
                                             self?.loadData()
                                         }
