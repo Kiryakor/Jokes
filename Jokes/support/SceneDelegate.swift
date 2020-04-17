@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if user == nil {
                 self.window?.rootViewController = AuthViewController()
             }else{
-                self.window?.rootViewController = AuthViewController()
+                self.window?.rootViewController = ContentViewController()
             }
         }
         window?.makeKeyAndVisible()

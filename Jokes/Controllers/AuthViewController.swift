@@ -84,13 +84,13 @@ extension AuthViewController{
         
         //setup email element
         emailLabel = UILabel(text: "Email", font: .avenir16())
-        emailTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor(),textContentType: .emailAddress)
+        emailTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .blackColor(),textContentType: .emailAddress)
         emailTextField.delegate = self
         emailStackView = UIStackView(arrangedSubviews: [emailLabel,emailTextField], axis: .vertical, spacing: 0)
         
         //setup password element
         passwordLabel = UILabel(text: "Password", font: .avenir16())
-        passwordTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .grayColor(),textContentType: .password)
+        passwordTextField = TextFieldBottonLine(font: .avenir16(), backgroundColor: .blackColor(),textContentType: .password)
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
         passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,passwordTextField], axis: .vertical, spacing: 0)

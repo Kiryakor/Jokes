@@ -11,11 +11,11 @@ import UIKit
 extension UIColor{
     
     static func blackColor() -> UIColor{
-        return .black
+        return .darkText
     }
     
     static func grayColor() -> UIColor{
-        return .gray
+        return #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
     }
     
     static func whiteColor() -> UIColor{
@@ -23,7 +23,7 @@ extension UIColor{
     }
     
     static func backgroundColor() -> UIColor{
-        return .white
+        return #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
     }
     
     convenience init(red: Int, green: Int, blue: Int) {

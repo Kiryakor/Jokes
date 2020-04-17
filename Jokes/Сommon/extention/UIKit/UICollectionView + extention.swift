@@ -13,7 +13,7 @@ extension UICollectionView{
                      flowLayout:UICollectionViewFlowLayout,
                      isPagingEnabled:Bool = false,
                      autoresizingMask:UIView.AutoresizingMask = [.flexibleHeight,.flexibleWidth],
-                     backgroundColor:UIColor = .whiteColor()
+                     backgroundColor:UIColor = .backgroundColor()
     ){
         self.init(frame:frame,collectionViewLayout:flowLayout)
         

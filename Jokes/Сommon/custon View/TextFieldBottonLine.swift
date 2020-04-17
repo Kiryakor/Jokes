@@ -17,6 +17,7 @@ class TextFieldBottonLine: UITextField {
         self.borderStyle = .none
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textContentType = textContentType
+        self.textColor = .blackColor()
         
         var bottomView = UIView()
         bottomView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))

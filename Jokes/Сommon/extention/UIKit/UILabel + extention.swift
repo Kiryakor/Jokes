@@ -15,5 +15,7 @@ extension UILabel{
         
         self.font = font
         self.text = text
+        self.textColor = .blackColor()
+        self.tintColor = .blackColor()
     }
 }
