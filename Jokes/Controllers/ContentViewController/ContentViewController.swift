@@ -9,11 +9,19 @@
 import UIKit
 import RealmSwift
 
+class hrefList: Object {
+    @objc dynamic var task = ""
+}
+
 class ContentViewController: UIViewController {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
+    
+    let realm = try! Realm() // Доступ к хранилищу
+    var imageUrl: Results<hrefList>! //Контейнер со свойствами объекта TaskList
+    var maxViewedIndex:Int = -1
     
     let server = Server()
     var dataList:[String] = []
@@ -23,7 +31,21 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor()
         setup()
-        loadData()
+        
+        //получаем данные из realm
+        imageUrl = realm.objects(hrefList.self)
+        var data:[String] = []
+        for i in imageUrl{
+            data.append(i.task)
+        }
+        if data.count != 0{
+            loadIndicatorView.stopAnimating()
+        }
+        dataList += data
+        print(dataList.count)
+        if dataList.count < 10{
+            loadData()
+        }
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
     }
@@ -34,6 +56,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == dataList.count - 4 { loadData() }
+        maxViewedIndex = max(maxViewedIndex, indexPath.row)
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cell.contentCell(url: dataList[indexPath.row])
@@ -101,6 +124,19 @@ extension ContentViewController{
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        //save data [string]
+        //удаляем все записи из realm
+        try! self.realm.write {
+            self.realm.delete(imageUrl)
+        }
+        
+        var saveArray:[hrefList] = []
+        for index in maxViewedIndex..<dataList.count{
+            saveArray.append(hrefList(value: ["\(dataList[index])"]))
+        }
+        
+        try! self.realm.write {
+            self.realm.add(saveArray)
+        }
     }
 }
+
