@@ -95,8 +95,15 @@ extension ContentViewController{
     
     func loadDataRealm(){
         dataList += RealmHelpers.loadDataAndStringConvert()
-        (dataList.count > 0) ? loadIndicatorView.stopAnimating() : contentCollectionView.reloadData()
-        if dataList.count < 10{ loadDataServer() }
+        
+        if dataList.count > 0{
+            loadIndicatorView.stopAnimating()
+            contentCollectionView.reloadData()
+        }
+        
+        if dataList.count < 10{
+            loadDataServer()
+        }
     }
     
     func errorServerAlert(){
