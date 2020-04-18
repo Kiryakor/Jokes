@@ -15,6 +15,7 @@ class ContentViewController: UIViewController {
     var loadIndicatorView:UIActivityIndicatorView!
 
     var maxViewedIndex:Int = 0
+    var index:Int = 0
     var dataList:[String] = []
     
     //MARK: Lifecycle
@@ -25,11 +26,15 @@ class ContentViewController: UIViewController {
         loadDataRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(longTap(_:)), name: NSNotification.Name(rawValue: "longTapImageScrollView"), object: nil)
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
         RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+    }
+    
+    @objc func longTap(_ notification: NSNotification){
+        Sharing.share(on: self, text: "Infinity meme", image: #imageLiteral(resourceName: "notInternet"), link: nil)
     }
 }
 

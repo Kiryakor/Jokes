@@ -115,8 +115,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     @objc func longTap(sender: UILongPressGestureRecognizer){
-        print("long tap")
-        //Sharing.share(on: self , text: "share", image: #imageLiteral(resourceName: "notInternet"), link: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "longTapImageScrollView"), object: nil)
     }
     
     func zoom(point: CGPoint, animated: Bool) {
