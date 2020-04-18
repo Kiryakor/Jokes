@@ -7,6 +7,7 @@ target 'Jokes' do
 pod 'Alamofire'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
+pod 'RealmSwift'
   # Pods for Jokes
 
 end
