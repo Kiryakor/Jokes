@@ -14,7 +14,7 @@ class ContentViewController: UIViewController {
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
 
-    var maxViewedIndex:Int = -1
+    var maxViewedIndex:Int = 0
     var dataList:[String] = []
     
     //MARK: Lifecycle
@@ -40,7 +40,11 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
         maxViewedIndex = max(maxViewedIndex, indexPath.row)
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
-        cell.contentCell(url: dataList[indexPath.row])
+        if Connectivity.isConnectedToInternet(){
+            cell.contentCell(url: dataList[indexPath.row])
+        }else{
+            errorInternetAlert()
+        }
         return cell
     }
 
@@ -113,6 +117,19 @@ extension ContentViewController{
                                         titleAction: "Повторить попытку".localized,
                                         styleAction: .default) { [weak self] (alert) in
                                             self?.loadDataServer()
+                                        }
+        present(alert,animated:true)
+    }
+    
+    func errorInternetAlert(){
+        let alert = Alert.alertOneAction(titleAlert: nil,
+                                         messageAlert: "Отсутствует подключение к интернету".localized,
+                                        preferredStyle: .alert,
+                                        titleAction: "Повторить попытку".localized,
+                                        styleAction: .default) { [weak self] (alert) in
+                                            if !Connectivity.isConnectedToInternet(){
+                                                self?.errorServerAlert()
+                                            }
                                         }
         present(alert,animated:true)
     }
