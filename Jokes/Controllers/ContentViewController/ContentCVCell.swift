@@ -44,7 +44,7 @@ class ContentCVCell: UICollectionViewCell {
     
     func contentCell(url:String){
         if Connectivity.isConnectedToInternet(){
-            Server().loadImage(url: url) { [weak self] (data) in
+            Server.loadImage(url: url) { [weak self] (data) in
                 self?.setImage(image: UIImage(data: data)!)
             }
         }else{

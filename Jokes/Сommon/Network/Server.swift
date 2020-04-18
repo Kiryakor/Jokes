@@ -12,7 +12,7 @@ import FirebaseStorage
 import Alamofire
 
 class Server {
-    func createUser(email:String,password:String,complition: @escaping(Bool)->Void) {
+    class func createUser(email:String,password:String,complition: @escaping(Bool)->Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             guard error == nil else {
                 complition(false)
@@ -22,7 +22,7 @@ class Server {
         }
     }
     
-    func loadImage(url:String,complition:@escaping(Data)->Void) {
+    class func loadImage(url:String,complition:@escaping(Data)->Void) {
         let storageRef = Storage.storage().reference(withPath: url)
         storageRef.getData(maxSize: 4*1024*1024) { (data, error) in
             guard let data = data, error == nil else { return }
@@ -30,8 +30,7 @@ class Server {
         }
     }
     
-    //запрос на сервер
-    func request(imageCount:Int = 50,complition: @escaping([String])->Void){
+    class func request(imageCount:Int = 50,complition: @escaping([String])->Void){
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
             

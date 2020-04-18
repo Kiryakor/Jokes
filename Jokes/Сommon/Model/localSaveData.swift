@@ -8,6 +8,6 @@
 
 import RealmSwift
 
-class hrefList: Object {
-    @objc dynamic var task = ""
+class localSaveData: Object {
+    @objc dynamic var imageUrl = ""
 }

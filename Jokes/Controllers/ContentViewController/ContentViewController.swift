@@ -15,7 +15,6 @@ class ContentViewController: UIViewController {
     var loadIndicatorView:UIActivityIndicatorView!
 
     var maxViewedIndex:Int = -1
-    let server = Server()
     var dataList:[String] = []
     
     //MARK: Lifecycle
@@ -83,13 +82,13 @@ extension ContentViewController{
 //MARK: func
 extension ContentViewController{
     func loadDataServer(){
-        server.request { [weak self](data) in
+        Server.request { [weak self](data) in
             if data.count != 0{
                 self?.loadIndicatorView.stopAnimating()
                 self?.dataList += data
                 self?.contentCollectionView.reloadData()
             }else{
-                self?.alert()
+                self?.errorServerAlert()
             }
         }
     }
@@ -100,7 +99,7 @@ extension ContentViewController{
         if dataList.count < 10{ loadDataServer() }
     }
     
-    func alert(){
+    func errorServerAlert(){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Ошибка сервера".localized,
                                         preferredStyle: .alert,

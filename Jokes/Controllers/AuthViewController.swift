@@ -27,8 +27,6 @@ class AuthViewController: UIViewController {
     
     private var mainStackView:UIStackView!
     
-    let server = Server()
-    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,7 @@ class AuthViewController: UIViewController {
     //MARK: Function
     @objc func tapEmailButton(){
         if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
-            server.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
+            Server.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
                 if result {
                     self?.present(ContentViewController(modalPresentationStyle: .fullScreen),animated: true,completion: nil)
                 }else { self?.errorTextField() }
