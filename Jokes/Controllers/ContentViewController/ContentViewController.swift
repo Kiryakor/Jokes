@@ -7,22 +7,14 @@
 //
 
 import UIKit
-import RealmSwift
-
-class hrefList: Object {
-    @objc dynamic var task = ""
-}
 
 class ContentViewController: UIViewController {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
-    
-    let realm = try! Realm() // Доступ к хранилищу
-    var imageUrl: Results<hrefList>! //Контейнер со свойствами объекта TaskList
+
     var maxViewedIndex:Int = -1
-    
     let server = Server()
     var dataList:[String] = []
     
@@ -31,23 +23,13 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor()
         setup()
-        
-        //получаем данные из realm
-        imageUrl = realm.objects(hrefList.self)
-        var data:[String] = []
-        for i in imageUrl{
-            data.append(i.task)
-        }
-        if data.count != 0{
-            loadIndicatorView.stopAnimating()
-        }
-        dataList += data
-        print(dataList.count)
-        if dataList.count < 10{
-            loadData()
-        }
+        loadDataRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
+    }
+    
+    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
+        RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
     }
 }
 
@@ -55,7 +37,7 @@ class ContentViewController: UIViewController {
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == dataList.count - 4 { loadData() }
+        if indexPath.row == dataList.count - 4 { loadDataServer() }
         maxViewedIndex = max(maxViewedIndex, indexPath.row)
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
@@ -100,7 +82,7 @@ extension ContentViewController{
 
 //MARK: func
 extension ContentViewController{
-    func loadData(){
+    func loadDataServer(){
         server.request { [weak self](data) in
             if data.count != 0{
                 self?.loadIndicatorView.stopAnimating()
@@ -112,31 +94,21 @@ extension ContentViewController{
         }
     }
     
+    func loadDataRealm(){
+        dataList += RealmHelpers.loadDataAndStringConvert()
+        (dataList.count > 0) ? loadIndicatorView.stopAnimating() : contentCollectionView.reloadData()
+        if dataList.count < 10{ loadDataServer() }
+    }
+    
     func alert(){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Ошибка сервера".localized,
                                         preferredStyle: .alert,
                                         titleAction: "Повторить попытку".localized,
                                         styleAction: .default) { [weak self] (alert) in
-                                            self?.loadData()
+                                            self?.loadDataServer()
                                         }
         present(alert,animated:true)
-    }
-    
-    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        //удаляем все записи из realm
-        try! self.realm.write {
-            self.realm.delete(imageUrl)
-        }
-        
-        var saveArray:[hrefList] = []
-        for index in maxViewedIndex..<dataList.count{
-            saveArray.append(hrefList(value: ["\(dataList[index])"]))
-        }
-        
-        try! self.realm.write {
-            self.realm.add(saveArray)
-        }
     }
 }
 
