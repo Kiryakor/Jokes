@@ -43,7 +43,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
         if Connectivity.isConnectedToInternet(){
             cell.contentCell(url: dataList[indexPath.row])
         }else{
-            errorInternetAlert()
+            Alert.errorInternetAlert(on: self)
         }
         return cell
     }
@@ -92,7 +92,7 @@ extension ContentViewController{
                 self?.dataList += data
                 self?.contentCollectionView.reloadData()
             }else{
-                self?.errorServerAlert()
+                Alert.errorServerAlert(on: self!)
             }
         }
     }
@@ -108,30 +108,6 @@ extension ContentViewController{
         if dataList.count < 10{
             loadDataServer()
         }
-    }
-    
-    func errorServerAlert(){
-        let alert = Alert.alertOneAction(titleAlert: nil,
-                                         messageAlert: "Ошибка сервера".localized,
-                                        preferredStyle: .alert,
-                                        titleAction: "Повторить попытку".localized,
-                                        styleAction: .default) { [weak self] (alert) in
-                                            self?.loadDataServer()
-                                        }
-        present(alert,animated:true)
-    }
-    
-    func errorInternetAlert(){
-        let alert = Alert.alertOneAction(titleAlert: nil,
-                                         messageAlert: "Отсутствует подключение к интернету".localized,
-                                        preferredStyle: .alert,
-                                        titleAction: "Повторить попытку".localized,
-                                        styleAction: .default) { [weak self] (alert) in
-                                            if !Connectivity.isConnectedToInternet(){
-                                                self?.errorServerAlert()
-                                            }
-                                        }
-        present(alert,animated:true)
     }
 }
 

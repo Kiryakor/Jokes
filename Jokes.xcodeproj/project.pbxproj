@@ -20,6 +20,7 @@
 		ED68312A244A4D02008D3882 /* String + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED683129244A4D02008D3882 /* String + extention.swift */; };
 		ED7499E0244B364A003E99DC /* RealmHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7499DF244B364A003E99DC /* RealmHelpers.swift */; };
 		ED7499E2244B3A94003E99DC /* localSaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7499E1244B3A94003E99DC /* localSaveData.swift */; };
+		ED7499E4244B7C02003E99DC /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7499E3244B7C02003E99DC /* Sharing.swift */; };
 		EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB2F3D5244218A00087D73D /* ImageScrollView.swift */; };
 		EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3F52A2448DE6400074B94 /* Connectivity.swift */; };
 		EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2264243A4A3100B251DC /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 		ED683129244A4D02008D3882 /* String + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + extention.swift"; sourceTree = "<group>"; };
 		ED7499DF244B364A003E99DC /* RealmHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelpers.swift; sourceTree = "<group>"; };
 		ED7499E1244B3A94003E99DC /* localSaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = localSaveData.swift; sourceTree = "<group>"; };
+		ED7499E3244B7C02003E99DC /* Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing.swift; sourceTree = "<group>"; };
 		EDB2F3D5244218A00087D73D /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		EDE3F52A2448DE6400074B94 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		EDEF2261243A4A3100B251DC /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				EDE3F52A2448DE6400074B94 /* Connectivity.swift */,
 				EDF33E75244A075E00D5E499 /* Alert.swift */,
 				ED7499DF244B364A003E99DC /* RealmHelpers.swift */,
+				ED7499E3244B7C02003E99DC /* Sharing.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */,
 				EDEF228B243B063600B251DC /* ContentViewController.swift in Sources */,
 				EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */,
+				ED7499E4244B7C02003E99DC /* Sharing.swift in Sources */,
 				ED64D4E7243CDEDF009E3EB2 /* UITextField + extention.swift in Sources */,
 				EDEF2281243A4BB100B251DC /* UILabel + extention.swift in Sources */,
 				ED7499E0244B364A003E99DC /* RealmHelpers.swift in Sources */,

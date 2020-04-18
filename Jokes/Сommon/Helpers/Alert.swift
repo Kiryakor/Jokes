@@ -22,4 +22,30 @@ class Alert {
         alert.addAction(action)
         return alert
     }
+    
+    class func errorServerAlert(on viewController: ContentViewController){
+        let alert = Alert.alertOneAction(titleAlert: nil,
+                                         messageAlert: "Ошибка сервера".localized,
+                                        preferredStyle: .alert,
+                                        titleAction: "Повторить попытку".localized,
+                                        styleAction: .default) { [weak viewController](alert) in
+                                            viewController?.loadDataServer()
+                                        }
+        viewController.present(alert,animated:true)
+    }
+    
+    class func errorInternetAlert(on viewController: ContentViewController){
+        let alert = Alert.alertOneAction(titleAlert: nil,
+                                         messageAlert: "Отсутствует подключение к интернету".localized,
+                                        preferredStyle: .alert,
+                                        titleAction: "Повторить попытку".localized,
+                                        styleAction: .default) { [weak viewController](alert) in
+                                            if !Connectivity.isConnectedToInternet(){
+                                                errorInternetAlert(on: viewController!)
+                                            }else{
+                                                viewController?.contentCollectionView.reloadData()
+                                            }
+                                        }
+        viewController.present(alert,animated:true)
+    }
 }
