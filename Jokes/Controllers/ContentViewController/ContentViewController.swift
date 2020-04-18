@@ -18,11 +18,13 @@ class ContentViewController: UIViewController {
     var dataList:[String] = []
     
     //MARK: Lifecycle
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .backgroundColor()
         setup()
         loadData()
-        view.backgroundColor = .backgroundColor()
+        
+        NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
     }
 }
 
@@ -95,5 +97,9 @@ extension ContentViewController{
                                             self?.loadData()
                                         }
         present(alert,animated:true)
+    }
+    
+    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
+        //save data [string]
     }
 }

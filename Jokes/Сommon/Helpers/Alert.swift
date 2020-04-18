@@ -16,6 +16,7 @@ class Alert {
                         styleAction:UIAlertAction.Style,
                         hander:((UIAlertAction)->Void)?
     ) -> UIAlertController{
+        
         let alert = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: preferredStyle)
         let action = UIAlertAction(title: titleAction, style: styleAction, handler: hander)
         alert.addAction(action)

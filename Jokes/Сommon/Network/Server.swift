@@ -50,7 +50,7 @@ class Server {
                 case .failure(let error):
                     //неверный формат
                     print(error.localizedDescription)
-                    print(error.isResponseSerializationError)
+                    //print(error.isResponseSerializationError)
                     complition([])
                 }
             }
