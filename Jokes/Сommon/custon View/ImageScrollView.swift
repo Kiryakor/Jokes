@@ -11,6 +11,10 @@ import UIKit
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
     var imageZoomView: UIImageView?
+    lazy var longTap:UILongPressGestureRecognizer = {
+        let longTap = UILongPressGestureRecognizer(target: self, action: #selector(longTap(sender:)))
+        return longTap
+    }()
     
     lazy var zoomingTap: UITapGestureRecognizer = {
         let zoomingTap = UITapGestureRecognizer(target: self, action: #selector(handleZoomingTap))
@@ -48,7 +52,9 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         
         self.imageZoomView!.addGestureRecognizer(self.zoomingTap)
         self.imageZoomView!.isUserInteractionEnabled = true
-
+        
+        self.imageZoomView!.addGestureRecognizer(self.longTap)
+        self.imageZoomView!.isUserInteractionEnabled = true
     }
     
     override func layoutSubviews() {
@@ -106,6 +112,11 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     @objc func handleZoomingTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: sender.view)
         self.zoom(point: location, animated: true)
+    }
+    
+    @objc func longTap(sender: UILongPressGestureRecognizer){
+        print("long tap")
+        //Sharing.share(on: self , text: "share", image: #imageLiteral(resourceName: "notInternet"), link: nil)
     }
     
     func zoom(point: CGPoint, animated: Bool) {

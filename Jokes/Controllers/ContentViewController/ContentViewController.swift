@@ -25,6 +25,7 @@ class ContentViewController: UIViewController {
         loadDataRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
+    
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
