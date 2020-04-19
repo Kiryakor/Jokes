@@ -49,6 +49,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == dataList.count - 4 { loadDataServer() }
+        if indexPath.row == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, indexPath.row)
         activeIndex = indexPath.row
         
