@@ -10,11 +10,11 @@ import UIKit
 
 class Alert {
     class func alertOneAction(titleAlert:String?,
-                        messageAlert:String?,
-                        preferredStyle:UIAlertController.Style,
-                        titleAction:String?,
-                        styleAction:UIAlertAction.Style,
-                        hander:((UIAlertAction)->Void)?
+                              messageAlert:String?,
+                              preferredStyle:UIAlertController.Style,
+                              titleAction:String?,
+                              styleAction:UIAlertAction.Style,
+                              hander:((UIAlertAction)->Void)?
     ) -> UIAlertController{
         
         let alert = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: preferredStyle)

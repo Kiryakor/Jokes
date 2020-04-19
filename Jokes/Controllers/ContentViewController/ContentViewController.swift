@@ -14,7 +14,6 @@ class ContentViewController: UIViewController {
     //MARK: Var
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
-    
     var interstitial: GADInterstitial!
     
     var maxViewedIndex:Int = 0
@@ -97,7 +96,7 @@ extension ContentViewController{
     }
 }
 
-//MARK: func
+//MARK: loadData
 extension ContentViewController{
     func loadDataServer(){
         Server.request { [weak self](data) in
@@ -125,9 +124,10 @@ extension ContentViewController{
     }
 }
 
+//MARK: GoogleMobileAds
 extension ContentViewController: GADInterstitialDelegate{
     func createAndLoadInterstitial() -> GADInterstitial {
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let interstitial = GADInterstitial(adUnitID: adUnitIDReturn(cell: .contentInterstitial))
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
