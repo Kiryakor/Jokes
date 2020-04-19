@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class ContentViewController: UIViewController {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
-
+    
+    var interstitial: GADInterstitial!
+    
     var maxViewedIndex:Int = 0
     var activeIndex:Int = 0
     var dataList:[String] = []
@@ -21,6 +24,8 @@ class ContentViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        interstitial = createAndLoadInterstitial()
+        
         view.backgroundColor = .backgroundColor()
         setup()
         loadDataRealm()
@@ -35,7 +40,7 @@ class ContentViewController: UIViewController {
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
         Server.loadImage(url: dataList[activeIndex]) { (data) in
-             Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
+            Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
         }
     }
 }
@@ -47,6 +52,10 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
         if indexPath.row == dataList.count - 4 { loadDataServer() }
         maxViewedIndex = max(maxViewedIndex, indexPath.row)
         activeIndex = indexPath.row
+        
+        if interstitial.isReady && indexPath.row % 10 == 9 {
+            interstitial.present(fromRootViewController: self)
+        }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         Connectivity.isConnectedToInternet() ? cell.contentCell(url: dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
@@ -113,5 +122,18 @@ extension ContentViewController{
         if dataList.count < 10{
             loadDataServer()
         }
+    }
+}
+
+extension ContentViewController: GADInterstitialDelegate{
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+      interstitial = createAndLoadInterstitial()
     }
 }

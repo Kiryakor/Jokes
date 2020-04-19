@@ -8,6 +8,7 @@ pod 'Alamofire'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'RealmSwift'
+pod 'Google-Mobile-Ads-SDK'
   # Pods for Jokes
 
 end
