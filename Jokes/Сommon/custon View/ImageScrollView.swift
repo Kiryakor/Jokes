@@ -115,7 +115,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     }
     
     @objc func longTap(sender: UILongPressGestureRecognizer){
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "longTapImageScrollView"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
     }
     
     func zoom(point: CGPoint, animated: Bool) {

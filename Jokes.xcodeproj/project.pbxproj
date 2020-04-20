@@ -13,6 +13,7 @@
 		ED3154EC244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */; };
 		ED3154F124461B4300A96512 /* UIViewController + extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3154F024461B4300A96512 /* UIViewController + extention.swift */; };
 		ED39AFFA243DF43A00133DA3 /* ContentCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */; };
+		ED4128A7244DBD0900EC610C /* notificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4128A6244DBD0900EC610C /* notificationName.swift */; };
 		ED64D4E1243CD225009E3EB2 /* cellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E0243CD225009E3EB2 /* cellModel.swift */; };
 		ED64D4E3243CDAB6009E3EB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */; };
 		ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64D4E4243CDE26009E3EB2 /* Server.swift */; };
@@ -49,6 +50,7 @@
 		ED3154EB244611FF00A96512 /* UICollectionViewFlowLayout + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout + extention.swift"; sourceTree = "<group>"; };
 		ED3154F024461B4300A96512 /* UIViewController + extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + extention.swift"; sourceTree = "<group>"; };
 		ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCVCell.swift; sourceTree = "<group>"; };
+		ED4128A6244DBD0900EC610C /* notificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationName.swift; sourceTree = "<group>"; };
 		ED64D4E0243CD225009E3EB2 /* cellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellModel.swift; sourceTree = "<group>"; };
 		ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED64D4E4243CDE26009E3EB2 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				ED64D4E0243CD225009E3EB2 /* cellModel.swift */,
 				ED7499E1244B3A94003E99DC /* localSaveData.swift */,
 				ED82D364244CAB07006657D3 /* adUnitID.swift */,
+				ED4128A6244DBD0900EC610C /* notificationName.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				ED64D4E5243CDE26009E3EB2 /* Server.swift in Sources */,
 				EDEF2269243A4A3100B251DC /* AuthViewController.swift in Sources */,
 				ED68312A244A4D02008D3882 /* String + extention.swift in Sources */,
+				ED4128A7244DBD0900EC610C /* notificationName.swift in Sources */,
 				ED11B94F2448972000856AB9 /* RateManager.swift in Sources */,
 				EDF33E76244A075E00D5E499 /* Alert.swift in Sources */,
 				EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */,

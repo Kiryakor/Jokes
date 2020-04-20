@@ -30,7 +30,7 @@ class ContentViewController: UIViewController {
         loadDataRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: "longTapImageScrollView"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
@@ -42,22 +42,25 @@ class ContentViewController: UIViewController {
             Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
         }
     }
+    
+    func cellHelpers(index:Int){
+        if index == dataList.count - 4 { loadDataServer() }
+             if index == 15 { RateManager.showRateController() }
+             maxViewedIndex = max(maxViewedIndex, index)
+             activeIndex = index
+             
+             if interstitial.isReady && index % 10 == 9 {
+                 interstitial.present(fromRootViewController: self)
+             }
+    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == dataList.count - 4 { loadDataServer() }
-        if indexPath.row == 15 { RateManager.showRateController() }
-        maxViewedIndex = max(maxViewedIndex, indexPath.row)
-        activeIndex = indexPath.row
-        
-        if interstitial.isReady && indexPath.row % 10 == 9 {
-            interstitial.present(fromRootViewController: self)
-        }
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
+        cellHelpers(index: indexPath.row)
         Connectivity.isConnectedToInternet() ? cell.contentCell(url: dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
         return cell
     }
