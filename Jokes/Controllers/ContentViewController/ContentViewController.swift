@@ -35,6 +35,7 @@ class ContentViewController: UIViewController {
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
         RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+        localNotifications.sendNotification()
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
@@ -45,13 +46,13 @@ class ContentViewController: UIViewController {
     
     func cellHelpers(index:Int){
         if index == dataList.count - 4 { loadDataServer() }
-             if index == 15 { RateManager.showRateController() }
-             maxViewedIndex = max(maxViewedIndex, index)
-             activeIndex = index
+        if index == 15 { RateManager.showRateController() }
+        maxViewedIndex = max(maxViewedIndex, index)
+        activeIndex = index
              
-             if interstitial.isReady && index % 10 == 9 {
-                 interstitial.present(fromRootViewController: self)
-             }
+        if interstitial.isReady && index % 10 == 9 {
+            interstitial.present(fromRootViewController: self)
+        }
     }
 }
 

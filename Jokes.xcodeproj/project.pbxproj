@@ -23,6 +23,8 @@
 		ED7499E2244B3A94003E99DC /* localSaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7499E1244B3A94003E99DC /* localSaveData.swift */; };
 		ED7499E4244B7C02003E99DC /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7499E3244B7C02003E99DC /* Sharing.swift */; };
 		ED82D365244CAB07006657D3 /* adUnitID.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED82D364244CAB07006657D3 /* adUnitID.swift */; };
+		ED8E7762244E2F8A00A08BCB /* localNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8E7761244E2F8A00A08BCB /* localNotifications.swift */; };
+		ED8E7764244E316100A08BCB /* userNotificationCIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8E7763244E316100A08BCB /* userNotificationCIdentifier.swift */; };
 		EDB2F3D6244218A00087D73D /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB2F3D5244218A00087D73D /* ImageScrollView.swift */; };
 		EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE3F52A2448DE6400074B94 /* Connectivity.swift */; };
 		EDEF2265243A4A3100B251DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF2264243A4A3100B251DC /* AppDelegate.swift */; };
@@ -60,9 +62,11 @@
 		ED7499E1244B3A94003E99DC /* localSaveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = localSaveData.swift; sourceTree = "<group>"; };
 		ED7499E3244B7C02003E99DC /* Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing.swift; sourceTree = "<group>"; };
 		ED82D364244CAB07006657D3 /* adUnitID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adUnitID.swift; sourceTree = "<group>"; };
+		ED8E7761244E2F8A00A08BCB /* localNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = localNotifications.swift; sourceTree = "<group>"; };
+		ED8E7763244E316100A08BCB /* userNotificationCIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userNotificationCIdentifier.swift; sourceTree = "<group>"; };
 		EDB2F3D5244218A00087D73D /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		EDE3F52A2448DE6400074B94 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
-		EDEF2261243A4A3100B251DC /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDEF2261243A4A3100B251DC /* Infinity meme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Infinity meme.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEF2264243A4A3100B251DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEF2266243A4A3100B251DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EDEF2268243A4A3100B251DC /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				EDF33E75244A075E00D5E499 /* Alert.swift */,
 				ED7499DF244B364A003E99DC /* RealmHelpers.swift */,
 				ED7499E3244B7C02003E99DC /* Sharing.swift */,
+				ED8E7761244E2F8A00A08BCB /* localNotifications.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				ED7499E1244B3A94003E99DC /* localSaveData.swift */,
 				ED82D364244CAB07006657D3 /* adUnitID.swift */,
 				ED4128A6244DBD0900EC610C /* notificationName.swift */,
+				ED8E7763244E316100A08BCB /* userNotificationCIdentifier.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,7 +197,7 @@
 		EDEF2262243A4A3100B251DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EDEF2261243A4A3100B251DC /* Jokes.app */,
+				EDEF2261243A4A3100B251DC /* Infinity meme.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +279,7 @@
 			);
 			name = Jokes;
 			productName = Jokes;
-			productReference = EDEF2261243A4A3100B251DC /* Jokes.app */;
+			productReference = EDEF2261243A4A3100B251DC /* Infinity meme.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -370,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDEF227B243A4AF700B251DC /* UIButton + extention.swift in Sources */,
+				ED8E7764244E316100A08BCB /* userNotificationCIdentifier.swift in Sources */,
 				ED7499E2244B3A94003E99DC /* localSaveData.swift in Sources */,
 				ED3154EA24460F4300A96512 /* UICollectionView + extention.swift in Sources */,
 				EDEF227F243A4B9C00B251DC /* UIFont + extention.swift in Sources */,
@@ -392,6 +399,7 @@
 				EDE3F52B2448DE6400074B94 /* Connectivity.swift in Sources */,
 				EDEF228B243B063600B251DC /* ContentViewController.swift in Sources */,
 				EDEF2267243A4A3100B251DC /* SceneDelegate.swift in Sources */,
+				ED8E7762244E2F8A00A08BCB /* localNotifications.swift in Sources */,
 				ED7499E4244B7C02003E99DC /* Sharing.swift in Sources */,
 				ED64D4E7243CDEDF009E3EB2 /* UITextField + extention.swift in Sources */,
 				ED82D365244CAB07006657D3 /* adUnitID.swift in Sources */,
@@ -541,7 +549,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.infinitymeme.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Infinity meme";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -560,7 +568,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.infinitymeme.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Infinity meme";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

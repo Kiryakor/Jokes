@@ -26,10 +26,10 @@ class Alert {
     class func errorServerAlert(on viewController: ContentViewController){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Ошибка сервера".localized,
-                                        preferredStyle: .alert,
-                                        titleAction: "Повторить попытку".localized,
-                                        styleAction: .default) { [weak viewController](alert) in
-                                            viewController?.loadDataServer()
+                                         preferredStyle: .alert,
+                                         titleAction: "Повторить попытку".localized,
+                                         styleAction: .default) { [weak viewController](alert) in
+                                                viewController?.loadDataServer()
                                         }
         viewController.present(alert,animated:true)
     }
@@ -37,9 +37,9 @@ class Alert {
     class func errorInternetAlert(on viewController: ContentViewController){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Отсутствует подключение к интернету".localized,
-                                        preferredStyle: .alert,
-                                        titleAction: "Повторить попытку".localized,
-                                        styleAction: .default) { [weak viewController](alert) in
+                                         preferredStyle: .alert,
+                                         titleAction: "Повторить попытку".localized,
+                                         styleAction: .default) { [weak viewController](alert) in
                                             if !Connectivity.isConnectedToInternet(){
                                                 errorInternetAlert(on: viewController!)
                                             }else{
