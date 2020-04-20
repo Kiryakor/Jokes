@@ -35,7 +35,7 @@ class ContentViewController: UIViewController {
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
         RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
-        localNotifications.sendNotification()
+        UserNotificationsHelper.sendNotification()
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){

@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum userNotificationCIdentifier {
+enum userNotifications {
     case local
 }
 
-func userNotificationCIdentifierReturn(identifier:userNotificationCIdentifier) -> String{
+func userNotificationsReturn(identifier:userNotifications) -> String{
     switch identifier {
     case .local:
         return "local"

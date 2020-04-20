@@ -9,7 +9,7 @@
 import Foundation
 import UserNotifications
 
-class localNotifications{
+class UserNotificationsHelper{
     
     class func setup(){
         let notificationCenter = UNUserNotificationCenter.current()
@@ -27,9 +27,9 @@ class localNotifications{
         content.body = "Новая подборка мемов уже готова для тебя "
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600*24, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
-        let request = UNNotificationRequest(identifier: userNotificationCIdentifierReturn(identifier: .local) , content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: userNotificationsReturn(identifier: .local) , content: content, trigger: trigger)
         
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.add(request) { (error) in

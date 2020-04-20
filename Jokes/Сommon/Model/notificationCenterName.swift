@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum notificationName {
+enum notificationCenterName {
     case longTapImageScrollView
 }
 
-func notificationNameReturn(name:notificationName) -> String{
+func notificationNameReturn(name:notificationCenterName) -> String{
     switch name {
     case .longTapImageScrollView:
         return "longTapImageScrollView"
