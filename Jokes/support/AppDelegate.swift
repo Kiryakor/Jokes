@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         RateManager.incrementCount()
-        UserNotificationsHelper.setup()
+        UserLocalNotifications.setup()
         return true
     }
 

@@ -9,7 +9,7 @@
 import Foundation
 import UserNotifications
 
-class UserNotificationsHelper{
+class UserLocalNotifications{
     
     class func setup(){
         let notificationCenter = UNUserNotificationCenter.current()
