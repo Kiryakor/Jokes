@@ -38,14 +38,19 @@ class AuthViewController: UIViewController {
     }
     
     //MARK: Function
-    @objc func tapEmailButton(){
-        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
-            Server.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result) in
-                if result {
-                    self?.present(ContentViewController(modalPresentationStyle: .fullScreen),animated: true,completion: nil)
-                }else { self?.errorTextField() }
+    @objc func tapEnterButton(){
+        guard let emailText = emailTextField.text, let passwordText = passwordTextField.text else {
+            errorTextField()
+            return
+        }
+        Server.createUser(email: emailText, password: passwordText) { [weak self] (result) in
+            switch result{
+            case true:
+                self?.present(ContentViewController(modalPresentationStyle: .fullScreen),animated: true,completion: nil)
+            case false:
+                self?.errorTextField()
             }
-        }else{ errorTextField() }
+        }
     }
 }
 
@@ -95,7 +100,7 @@ extension AuthViewController{
         
         //setup button
         emailButton = UIButton(title: "Email", titleColor: .blackColor(), backgroundColor: .whiteColor(), font: .avenir16(), cornerRadius: 0, isShadow: true)
-        emailTap = UITapGestureRecognizer(target: self, action: #selector(tapEmailButton))
+        emailTap = UITapGestureRecognizer(target: self, action: #selector(tapEnterButton))
         emailButton.addGestureRecognizer(emailTap)
         buttonStackView = UIStackView(arrangedSubviews: [emailButton], axis: .horizontal, spacing: 16)
         buttonStackView.distribution = .fillEqually
