@@ -37,4 +37,8 @@ class ContentViewModel {
             loadDataServer(complition: complition)
         }
     }
+    
+    func saveDataRealm(){
+        RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+    }
 }

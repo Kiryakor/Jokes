@@ -145,7 +145,6 @@
 			children = (
 				ED39AFF9243DF43A00133DA3 /* ContentCVCell.swift */,
 				EDEF228A243B063600B251DC /* ContentViewController.swift */,
-				ED6E21EB2452BF0C003644F5 /* ContentViewModel.swift */,
 			);
 			path = ContentViewController;
 			sourceTree = "<group>";
@@ -156,6 +155,14 @@
 				ED64D4E4243CDE26009E3EB2 /* Server.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		ED3A95F924531267004A26C7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED6E21EB2452BF0C003644F5 /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		ED64D4DF243CD20F009E3EB2 /* Model */ = {
@@ -209,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				ED256D432448A44400A5B997 /* Сommon */,
+				ED3A95F924531267004A26C7 /* ViewModel */,
 				ED64D4E8243CE87C009E3EB2 /* Controllers */,
 				EDEF2272243A4A3400B251DC /* Info.plist */,
 				ED64D4E2243CDAB6009E3EB2 /* GoogleService-Info.plist */,

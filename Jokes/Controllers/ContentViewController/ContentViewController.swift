@@ -15,45 +15,19 @@ class ContentViewController: UIViewController {
     var contentCollectionView: UICollectionView!
     var loadIndicatorView:UIActivityIndicatorView!
     var interstitial: GADInterstitial!
-    
-    var viewModel = ContentViewModel()
+    var viewModel:ContentViewModel!
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        interstitial = createAndLoadInterstitial()
+        viewModel = ContentViewModel()
+        viewModel.loadDataRealm { self.loadDataRealm() }
         
-        view.backgroundColor = .backgroundColor()
+        interstitial = createAndLoadInterstitial()
         setup()
-        viewModel.loadDataRealm {
-            self.loadDataRealm()
-        }
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
-    }
-    
-    @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: viewModel.dataList[viewModel.activeIndex]) { (data) in
-            Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
-        }
-    }
-    
-    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        RealmHelpers.saveData(data: viewModel.dataList, startIndex: viewModel.maxViewedIndex)
-        UserLocalNotifications.sendNotification()
-    }
-    
-    func cellHelpers(index:Int){
-        viewModel.cellHelper(index: index) {
-            self.loadDataServer()
-        }
-        
-        if index == 15 { RateManager.showRateController() }
-             
-        if interstitial.isReady && index % 10 == 9 {
-            interstitial.present(fromRootViewController: self)
-        }
     }
 }
 
@@ -79,6 +53,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 //MARK: Setup
 extension ContentViewController{
     func setup(){
+        view.backgroundColor = .backgroundColor()
         //CollectionView
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -113,11 +88,13 @@ extension ContentViewController: GADInterstitialDelegate{
     }
 
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-      interstitial = createAndLoadInterstitial()
+        interstitial = createAndLoadInterstitial()
     }
 }
 
+    //MARK:Func
 extension ContentViewController{
+    //updateUI
     func loadDataServer(){
         if self.viewModel.dataList.count != 0{
             self.loadIndicatorView.stopAnimating()
@@ -138,5 +115,24 @@ extension ContentViewController{
                 self.loadDataServer()
             }
         }
+    }
+
+    //NotificationCenter
+    @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
+        Server.loadImage(url: viewModel.dataList[viewModel.activeIndex]) { (data) in
+            Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
+        }
+    }
+    
+    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
+        viewModel.saveDataRealm()
+        UserLocalNotifications.sendNotification()
+    }
+    
+    //hekpers
+    func cellHelpers(index:Int){
+        viewModel.cellHelper(index: index) { self.loadDataServer() }
+        if index == 15 { RateManager.showRateController() }
+        if interstitial.isReady && index % 10 == 9 { interstitial.present(fromRootViewController: self) }
     }
 }
