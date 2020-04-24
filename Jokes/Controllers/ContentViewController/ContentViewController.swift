@@ -16,9 +16,7 @@ class ContentViewController: UIViewController {
     var loadIndicatorView:UIActivityIndicatorView!
     var interstitial: GADInterstitial!
     
-    var maxViewedIndex:Int = 0
-    var activeIndex:Int = 0
-    var dataList:[String] = []
+    var viewModel = ContentViewModel()
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -27,28 +25,31 @@ class ContentViewController: UIViewController {
         
         view.backgroundColor = .backgroundColor()
         setup()
-        loadDataRealm()
+        viewModel.loadDataRealm {
+            self.loadDataRealm()
+        }
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
     }
     
-    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
-        UserLocalNotifications.sendNotification()
-    }
-    
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: dataList[activeIndex]) { (data) in
+        Server.loadImage(url: viewModel.dataList[viewModel.activeIndex]) { (data) in
             Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
         }
     }
     
+    @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
+        RealmHelpers.saveData(data: viewModel.dataList, startIndex: viewModel.maxViewedIndex)
+        UserLocalNotifications.sendNotification()
+    }
+    
     func cellHelpers(index:Int){
-        if index == dataList.count - 4 { loadDataServer() }
+        viewModel.cellHelper(index: index) {
+            self.loadDataServer()
+        }
+        
         if index == 15 { RateManager.showRateController() }
-        maxViewedIndex = max(maxViewedIndex, index)
-        activeIndex = index
              
         if interstitial.isReady && index % 10 == 9 {
             interstitial.present(fromRootViewController: self)
@@ -62,12 +63,12 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cellHelpers(index: indexPath.row)
-        Connectivity.isConnectedToInternet() ? cell.contentCell(url: dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
+        Connectivity.isConnectedToInternet() ? cell.contentCell(url: viewModel.dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataList.count
+        return viewModel.dataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -101,33 +102,6 @@ extension ContentViewController{
     }
 }
 
-//MARK: loadData
-extension ContentViewController{
-    func loadDataServer(){
-        Server.request { [weak self](data) in
-            if data.count != 0{
-                self?.loadIndicatorView.stopAnimating()
-                self?.dataList += data
-                self?.contentCollectionView.reloadData()
-            }else{
-                Alert.errorServerAlert(on: self!)
-            }
-        }
-    }
-    
-    func loadDataRealm(){
-        dataList += RealmHelpers.loadDataAndStringConvert()
-        
-        if dataList.count > 0{
-            loadIndicatorView.stopAnimating()
-            contentCollectionView.reloadData()
-        }
-        
-        if dataList.count < 10{
-            loadDataServer()
-        }
-    }
-}
 
 //MARK: GoogleMobileAds
 extension ContentViewController: GADInterstitialDelegate{
@@ -140,5 +114,29 @@ extension ContentViewController: GADInterstitialDelegate{
 
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
       interstitial = createAndLoadInterstitial()
+    }
+}
+
+extension ContentViewController{
+    func loadDataServer(){
+        if self.viewModel.dataList.count != 0{
+            self.loadIndicatorView.stopAnimating()
+            self.contentCollectionView.reloadData()
+        }else{
+            Alert.errorServerAlert(on: self)
+        }
+    }
+    
+    func loadDataRealm(){
+        if self.viewModel.dataList.count > 0{
+            self.loadIndicatorView.stopAnimating()
+            self.contentCollectionView.reloadData()
+        }
+                
+        if self.viewModel.dataList.count < 10{
+            self.viewModel.loadDataServer {
+                self.loadDataServer()
+            }
+        }
     }
 }
