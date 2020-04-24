@@ -10,10 +10,19 @@ import Foundation
 import UIKit
 
 class ContentViewModel {
-    var maxViewedIndex:Int = 0
-    var activeIndex:Int = 0
-    var dataList:[String] = []
+    private var maxViewedIndex:Int = 0
+    private var activeIndex:Int = 0
+    private var dataList:[String] = []
     
+    var sizeData: Int{
+        get {
+            dataList.count
+        }
+    }
+    
+    func numberOfRowsInSection() -> Int {
+        return dataList.count
+    }
     
     func loadDataServer(complition:@escaping()->Void){
         Server.request { [weak self](data) in
@@ -40,5 +49,15 @@ class ContentViewModel {
     
     func saveDataRealm(){
         RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+    }
+    
+    func returnData(index:Int) -> String{
+        return dataList[index]
+    }
+    
+    func sharing(vc:UIViewController){
+        Server.loadImage(url: dataList[activeIndex]) { (data) in
+            Sharing.share(on: vc, text: "Infinity meme", image: UIImage(data: data), link: nil)
+        }
     }
 }

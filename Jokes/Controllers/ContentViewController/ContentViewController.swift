@@ -37,12 +37,12 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cellHelpers(index: indexPath.row)
-        Connectivity.isConnectedToInternet() ? cell.contentCell(url: viewModel.dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
+        Connectivity.isConnectedToInternet() ? cell.contentCell(url: viewModel.returnData(index: indexPath.row)) : Alert.errorInternetAlert(on: self)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.dataList.count
+        return viewModel.numberOfRowsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -96,7 +96,7 @@ extension ContentViewController: GADInterstitialDelegate{
 extension ContentViewController{
     //updateUI
     func loadDataServer(){
-        if self.viewModel.dataList.count != 0{
+        if self.viewModel.sizeData > 0{
             self.loadIndicatorView.stopAnimating()
             self.contentCollectionView.reloadData()
         }else{
@@ -105,12 +105,12 @@ extension ContentViewController{
     }
     
     func loadDataRealm(){
-        if self.viewModel.dataList.count > 0{
+        if self.viewModel.sizeData > 0{
             self.loadIndicatorView.stopAnimating()
             self.contentCollectionView.reloadData()
         }
                 
-        if self.viewModel.dataList.count < 10{
+        if self.viewModel.sizeData < 10{
             self.viewModel.loadDataServer {
                 self.loadDataServer()
             }
@@ -119,9 +119,7 @@ extension ContentViewController{
 
     //NotificationCenter
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: viewModel.dataList[viewModel.activeIndex]) { (data) in
-            Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
-        }
+        viewModel.sharing(vc: self)
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
