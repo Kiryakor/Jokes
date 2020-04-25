@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class ContentViewController: UIViewController {
+class ContentViewController: UIViewController,LoadDataProtocol,ContentCollectionView {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!

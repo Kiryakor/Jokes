@@ -23,7 +23,7 @@ class Alert {
         return alert
     }
     
-    class func errorServerAlert(on viewController: ContentViewController){
+    class func errorServerAlert(on viewController: UIViewController & LoadDataProtocol){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Ошибка сервера".localized,
                                          preferredStyle: .alert,
@@ -34,7 +34,7 @@ class Alert {
         viewController.present(alert,animated:true)
     }
     
-    class func errorInternetAlert(on viewController: ContentViewController){
+    class func errorInternetAlert(on viewController: UIViewController & LoadDataProtocol & ContentCollectionView){
         let alert = Alert.alertOneAction(titleAlert: nil,
                                          messageAlert: "Отсутствует подключение к интернету".localized,
                                          preferredStyle: .alert,
