@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class ContentViewController: UIViewController,LoadDataProtocol,ContentCollectionView {
+class ContentViewController: UIViewController,ContentCollectionView {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
@@ -101,8 +101,8 @@ extension ContentViewController{
     }
 }
 
-//MARK: loadData
-extension ContentViewController{
+//MARK: LoadDataProtocol
+extension ContentViewController: LoadDataProtocol{
     func loadDataServer(){
         Server.request { [weak self](data) in
             if data.count != 0{

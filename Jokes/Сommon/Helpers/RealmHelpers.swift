@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 
-//сделать через <T>
 class RealmHelpers{
     class func loadDataAndStringConvert()->[String]{
         let realm = try! Realm()
