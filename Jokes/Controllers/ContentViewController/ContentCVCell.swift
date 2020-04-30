@@ -11,10 +11,8 @@ import UIKit
 class ContentCVCell: UICollectionViewCell {
 
     //MARK: Var
-
     private var contentImage:ImageScrollView?
 
-    
     //MARK: Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)

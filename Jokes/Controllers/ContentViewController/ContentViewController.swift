@@ -13,8 +13,8 @@ class ContentViewController: UIViewController,ContentCollectionView {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
-    var loadIndicatorView:UIActivityIndicatorView!
-    var interstitial: GADInterstitial!
+    private var loadIndicatorView:UIActivityIndicatorView!
+    private var interstitial: GADInterstitial!
     
     private var maxViewedIndex:Int = 0
     private var activeIndex:Int = 0
@@ -46,8 +46,10 @@ class ContentViewController: UIViewController,ContentCollectionView {
         }
     }
     
-    func cellHelpers(index:Int){
-        if index == dataList.count - 4 { loadPathImageServer() }
+
+    private func cellHelpers(index:Int){
+        if index == urlList.count - 4 { loadPathImageServer() }
+
         if index == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
@@ -73,7 +75,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataList.count
+        return urlList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -83,7 +85,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
 //MARK: Setup
 extension ContentViewController{
-    func setup(){
+    private func setup(){
         //CollectionView
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -135,7 +137,7 @@ extension ContentViewController: LoadDataProtocol{
             }
         }
     }
-    
+
     func loadDataImage(){
         let index = maxViewedIndex
         let minValue = min(10, urlList.count - maxViewedIndex)
