@@ -22,9 +22,16 @@ class UserLocalNotifications{
     }
     
     class func sendNotification() {
+        let contentList:[String] = ["Дожили... Новая подборка мемов уже доступна для тебя",
+                                    "Кура, булка, греча, поребрик... А у наc новая подберка мемов для тебя",
+                                    "Вечер в ладу... у нас новости для тебя - заходи",
+                                    "Прошло успешно... Смотри новые мемы в приложении",
+                                    "Come on. Ты не знал? Мемы не спят",
+                                    "Yo, свежие новинки подъехали"]
+        
         let content = UNMutableNotificationContent()
-        content.title = "Мемы ждут"
-        content.body = "Новая подборка мемов уже готова для тебя "
+        content.title = ""
+        content.body = contentList.randomElement()!
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*10, repeats: false)
