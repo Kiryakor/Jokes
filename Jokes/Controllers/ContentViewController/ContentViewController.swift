@@ -18,7 +18,7 @@ class ContentViewController: UIViewController,ContentCollectionView {
     
     private var maxViewedIndex:Int = 0
     private var activeIndex:Int = 0
-    private var dataList:[String] = []
+    private var urlList:[String] = []
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -27,25 +27,25 @@ class ContentViewController: UIViewController,ContentCollectionView {
         
         view.backgroundColor = .backgroundColor()
         setup()
-        loadDataRealm()
+        loadPathImageRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+        RealmHelpers.saveData(data: urlList, startIndex: maxViewedIndex)
         UserLocalNotifications.sendNotification()
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: dataList[activeIndex]) { (data) in
+        Server.loadImage(url: urlList[activeIndex]) { (data) in
             Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
         }
     }
     
     private func cellHelpers(index:Int){
-        if index == dataList.count - 4 { loadDataServer() }
+        if index == urlList.count - 4 { loadPathImageServer() }
         if index == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
@@ -62,12 +62,12 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cellHelpers(index: indexPath.row)
-        Connectivity.isConnectedToInternet() ? cell.contentCell(url: dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
+        Connectivity.isConnectedToInternet() ? cell.contentCell(url: urlList[indexPath.row]) : Alert.errorInternetAlert(on: self)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataList.count
+        return urlList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -103,11 +103,11 @@ extension ContentViewController{
 
 //MARK: LoadDataProtocol
 extension ContentViewController: LoadDataProtocol{
-    func loadDataServer(){
+    func loadPathImageServer(){
         Server.request { [weak self](data) in
             if data.count != 0{
                 self?.loadIndicatorView.stopAnimating()
-                self?.dataList += data
+                self?.urlList += data
                 self?.contentCollectionView.reloadData()
             }else{
                 Alert.errorServerAlert(on: self!)
@@ -115,17 +115,15 @@ extension ContentViewController: LoadDataProtocol{
         }
     }
     
-    func loadDataRealm(){
-        dataList += RealmHelpers.loadDataAndStringConvert()
+    func loadPathImageRealm(){
+        urlList += RealmHelpers.loadDataAndStringConvert()
         
-        if dataList.count > 0{
+        if urlList.count > 0{
             loadIndicatorView.stopAnimating()
             contentCollectionView.reloadData()
         }
         
-        if dataList.count < 10{
-            loadDataServer()
-        }
+        if urlList.count < 10{ loadPathImageServer() }
     }
 }
 

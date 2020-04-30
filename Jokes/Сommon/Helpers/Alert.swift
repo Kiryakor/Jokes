@@ -29,7 +29,7 @@ class Alert {
                                          preferredStyle: .alert,
                                          titleAction: "Повторить попытку".localized,
                                          styleAction: .default) { [weak viewController](alert) in
-                                                viewController?.loadDataServer()
+                                                viewController?.loadPathImageServer()
                                         }
         viewController.present(alert,animated:true)
     }

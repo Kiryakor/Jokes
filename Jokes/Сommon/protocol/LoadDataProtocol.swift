@@ -9,6 +9,6 @@
 import Foundation
 
 protocol LoadDataProtocol {
-    func loadDataRealm()
-    func loadDataServer()
+    func loadPathImageRealm()
+    func loadPathImageServer()
 }
