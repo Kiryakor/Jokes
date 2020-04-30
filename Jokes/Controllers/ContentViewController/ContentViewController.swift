@@ -51,10 +51,10 @@ class ContentViewController: UIViewController,ContentCollectionView {
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
         
-        if index == urlList.count - 4 { loadPathImageServer() }
+        if index == urlList.count - 15 { loadPathImageServer() }
         if index == 15 { RateManager.showRateController() }
-        if index == dataList.count - 5 { loadDataImage() }
-        if index % 10 == 9 && interstitial.isReady { interstitial.present(fromRootViewController: self) }
+        if index == dataList.count - 10 { loadDataImage() }
+        if index % 20 == 19 && interstitial.isReady { interstitial.present(fromRootViewController: self) }
         if index + 2 == dataList.count && !Connectivity.isConnectedToInternet(){ Alert.errorInternetAlert(on: self) }
     }
 }
@@ -113,7 +113,7 @@ extension ContentViewController: LoadDataProtocol{
             loadDataImage()
         }
         
-        if dataList.count < 10{
+        if dataList.count < 20{
             loadPathImageServer()
         }
     }
@@ -131,7 +131,7 @@ extension ContentViewController: LoadDataProtocol{
 
     func loadDataImage(){
         let index = maxViewedIndex
-        let minValue = min(10, urlList.count - maxViewedIndex)
+        let minValue = min(25, urlList.count - maxViewedIndex)
         let imageGroup = DispatchGroup()
         for i in 0..<minValue{
             imageGroup.enter()
