@@ -23,8 +23,8 @@ class UserLocalNotifications{
     
     class func sendNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Мемы ждут"
-        content.body = "Новая подборка мемов уже готова для тебя "
+        content.title = "Смысл жизни меме? Меме ?"
+        content.body = "Новая подборка уже готова для тебя "
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*10, repeats: false)
