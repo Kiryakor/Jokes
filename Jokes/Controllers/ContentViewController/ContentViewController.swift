@@ -48,25 +48,19 @@ class ContentViewController: UIViewController,ContentCollectionView {
     
 
     private func cellHelpers(index:Int){
-        if index == urlList.count - 4 { loadPathImageServer() }
-
-        if index == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
-        if index == dataList.count - 5 { loadDataImage() }
-        if interstitial.isReady && index % 10 == 9 {
-            interstitial.present(fromRootViewController: self)
-        }
         
-        if index + 2 == dataList.count && !Connectivity.isConnectedToInternet(){
-            Alert.errorInternetAlert(on: self)
-        }
+        if index == urlList.count - 15 { loadPathImageServer() }
+        if index == 15 { RateManager.showRateController() }
+        if index == dataList.count - 10 { loadDataImage() }
+        if index % 20 == 19 && interstitial.isReady { interstitial.present(fromRootViewController: self) }
+        if index + 2 == dataList.count && !Connectivity.isConnectedToInternet(){ Alert.errorInternetAlert(on: self) }
     }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension ContentViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cellHelpers(index: indexPath.row)
@@ -117,10 +111,9 @@ extension ContentViewController: LoadDataProtocol{
         if dataList.count > 0{
             loadIndicatorView.stopAnimating()
             loadDataImage()
-            //contentCollectionView.reloadData()
         }
         
-        if dataList.count < 10{
+        if dataList.count < 20{
             loadPathImageServer()
         }
     }
@@ -128,10 +121,8 @@ extension ContentViewController: LoadDataProtocol{
     func loadPathImageServer() {
         Server.request { [weak self](data) in
             if data.count != 0{
-                self?.loadIndicatorView.stopAnimating()
                 self?.urlList += data
                 self?.loadDataImage()
-                //self?.contentCollectionView.reloadData()
             }else{
                 Alert.errorServerAlert(on: self!)
             }
@@ -140,7 +131,7 @@ extension ContentViewController: LoadDataProtocol{
 
     func loadDataImage(){
         let index = maxViewedIndex
-        let minValue = min(10, urlList.count - maxViewedIndex)
+        let minValue = min(25, urlList.count - maxViewedIndex)
         let imageGroup = DispatchGroup()
         for i in 0..<minValue{
             imageGroup.enter()
@@ -151,6 +142,7 @@ extension ContentViewController: LoadDataProtocol{
         }
         
         imageGroup.notify(queue: .main) {
+            self.loadIndicatorView.stopAnimating()
             self.contentCollectionView.reloadData()
         }
     }
