@@ -27,7 +27,7 @@ class UserLocalNotifications{
         content.body = "Новая подборка мемов уже готова для тебя "
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*10, repeats: false)
         
         let request = UNNotificationRequest(identifier: userNotificationsReturn(identifier: .local) , content: content, trigger: trigger)
         

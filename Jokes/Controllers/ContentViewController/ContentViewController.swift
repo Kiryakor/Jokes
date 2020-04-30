@@ -16,9 +16,11 @@ class ContentViewController: UIViewController,ContentCollectionView {
     var loadIndicatorView:UIActivityIndicatorView!
     var interstitial: GADInterstitial!
     
-    var maxViewedIndex:Int = 0
-    var activeIndex:Int = 0
-    var dataList:[String] = []
+    private var maxViewedIndex:Int = 0
+    private var activeIndex:Int = 0
+    private var urlList:[String] = []
+    private var dataList:[Data] = []
+
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -27,31 +29,35 @@ class ContentViewController: UIViewController,ContentCollectionView {
         
         view.backgroundColor = .backgroundColor()
         setup()
-        loadDataRealm()
+        loadPathImageRealm()
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
     }
     
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
-        RealmHelpers.saveData(data: dataList, startIndex: maxViewedIndex)
+        RealmHelpers.saveData(data: urlList, startIndex: maxViewedIndex)
         UserLocalNotifications.sendNotification()
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: dataList[activeIndex]) { (data) in
+        Server.loadImage(url: urlList[activeIndex]) { (data) in
             Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
         }
     }
     
     func cellHelpers(index:Int){
-        if index == dataList.count - 4 { loadDataServer() }
+        if index == dataList.count - 4 { loadPathImageServer() }
         if index == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
-             
+        if index == dataList.count - 5 { loadDataImage() }
         if interstitial.isReady && index % 10 == 9 {
             interstitial.present(fromRootViewController: self)
+        }
+        
+        if index + 2 == dataList.count && !Connectivity.isConnectedToInternet(){
+            Alert.errorInternetAlert(on: self)
         }
     }
 }
@@ -62,7 +68,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReturn(cell: .contentCV), for: indexPath) as! ContentCVCell
         cellHelpers(index: indexPath.row)
-        Connectivity.isConnectedToInternet() ? cell.contentCell(url: dataList[indexPath.row]) : Alert.errorInternetAlert(on: self)
+        cell.setImage(image: UIImage(data: dataList[indexPath.row])!)
         return cell
     }
 
@@ -103,28 +109,47 @@ extension ContentViewController{
 
 //MARK: LoadDataProtocol
 extension ContentViewController: LoadDataProtocol{
-    func loadDataServer(){
+    func loadPathImageRealm() {
+        urlList += RealmHelpers.loadDataAndStringConvert()
+        
+        if dataList.count > 0{
+            loadIndicatorView.stopAnimating()
+            loadDataImage()
+            //contentCollectionView.reloadData()
+        }
+        
+        if dataList.count < 10{
+            loadPathImageServer()
+        }
+    }
+    
+    func loadPathImageServer() {
         Server.request { [weak self](data) in
             if data.count != 0{
                 self?.loadIndicatorView.stopAnimating()
-                self?.dataList += data
-                self?.contentCollectionView.reloadData()
+                self?.urlList += data
+                self?.loadDataImage()
+                //self?.contentCollectionView.reloadData()
             }else{
                 Alert.errorServerAlert(on: self!)
             }
         }
     }
     
-    func loadDataRealm(){
-        dataList += RealmHelpers.loadDataAndStringConvert()
-        
-        if dataList.count > 0{
-            loadIndicatorView.stopAnimating()
-            contentCollectionView.reloadData()
+    func loadDataImage(){
+        let index = maxViewedIndex
+        let minValue = min(10, urlList.count - maxViewedIndex)
+        let imageGroup = DispatchGroup()
+        for i in 0..<minValue{
+            imageGroup.enter()
+            Server.loadImage(url: self.urlList[index+i]) { [weak self] (data) in
+                self?.dataList.append(data)
+                imageGroup.leave()
+            }
         }
         
-        if dataList.count < 10{
-            loadDataServer()
+        imageGroup.notify(queue: .main) {
+            self.contentCollectionView.reloadData()
         }
     }
 }
