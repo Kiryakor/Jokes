@@ -11,8 +11,8 @@ import UIKit
 class ContentCVCell: UICollectionViewCell {
 
     //MARK: Var
-    var contentImage:ImageScrollView?
-    var loadLabel:UILabel?
+    private var contentImage:ImageScrollView?
+    private var loadLabel:UILabel?
     
     //MARK: Lifecycle
     override init(frame: CGRect) {
@@ -39,23 +39,23 @@ class ContentCVCell: UICollectionViewCell {
         ])
     }
     
-    func setImage(image:UIImage){
+    private func setImage(image:UIImage){
         contentImage!.set(image: image)
     }
     
     func contentCell(url:String){
         loadSetup()
-        
         Server.loadImage(url: url) { [weak self] (data) in
             self?.loadLabel?.isHidden = true
             self?.setImage(image: UIImage(data: data)!)
         }
     }
     
-    func loadSetup(){
+    private func loadSetup(){
         loadLabel = UILabel(text: "Мем грузится")
         guard let loadLabel = loadLabel else { return }
         self.addSubview(loadLabel)
+        
         loadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             loadLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),

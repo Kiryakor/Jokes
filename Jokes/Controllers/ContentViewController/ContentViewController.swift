@@ -13,12 +13,12 @@ class ContentViewController: UIViewController,ContentCollectionView {
     
     //MARK: Var
     var contentCollectionView: UICollectionView!
-    var loadIndicatorView:UIActivityIndicatorView!
-    var interstitial: GADInterstitial!
+    private var loadIndicatorView:UIActivityIndicatorView!
+    private var interstitial: GADInterstitial!
     
-    var maxViewedIndex:Int = 0
-    var activeIndex:Int = 0
-    var dataList:[String] = []
+    private var maxViewedIndex:Int = 0
+    private var activeIndex:Int = 0
+    private var dataList:[String] = []
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class ContentViewController: UIViewController,ContentCollectionView {
         }
     }
     
-    func cellHelpers(index:Int){
+    private func cellHelpers(index:Int){
         if index == dataList.count - 4 { loadDataServer() }
         if index == 15 { RateManager.showRateController() }
         maxViewedIndex = max(maxViewedIndex, index)
@@ -77,7 +77,7 @@ extension ContentViewController: UICollectionViewDataSource, UICollectionViewDel
 
 //MARK: Setup
 extension ContentViewController{
-    func setup(){
+    private func setup(){
         //CollectionView
         let flowLayout = UICollectionViewFlowLayout(scrollDirection: .horizontal, minimumLineSpacing: 0)
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)

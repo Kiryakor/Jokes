@@ -72,7 +72,7 @@ extension AuthViewController:UITextFieldDelegate{
         self.view.frame.origin.y = 0
     }
     
-    func errorTextField(){
+    private func errorTextField(){
         emailTextField.errorAnimation()
         passwordTextField.errorAnimation()
     }
