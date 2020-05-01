@@ -20,16 +20,14 @@ class ContentViewController: UIViewController,ContentCollectionView {
     private var activeIndex:Int = 0
     private var urlList:[String] = []
     private var dataList:[Data] = []
-
     
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        interstitial = createAndLoadInterstitial()
-        
+        interstitial = createAndLoadInterstitial() //ads
         view.backgroundColor = .backgroundColor()
         setup()
-        loadPathImageRealm()
+        loadPathImageRealm() //load content
         
         NotificationCenter.default.addObserver(self,selector: #selector(sceneWillResignActiveNotification(_:)),name: UIApplication.willResignActiveNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignLongTapImage(_:)), name: NSNotification.Name(rawValue: notificationNameReturn(name: .longTapImageScrollView)), object: nil)
@@ -41,12 +39,9 @@ class ContentViewController: UIViewController,ContentCollectionView {
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
-        Server.loadImage(url: urlList[activeIndex]) { (data) in
-            Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: data), link: nil)
-        }
+        Sharing.share(on: self, text: "Infinity meme", image: UIImage(data: dataList[activeIndex]), link: nil)
     }
     
-
     private func cellHelpers(index:Int){
         maxViewedIndex = max(maxViewedIndex, index)
         activeIndex = index
@@ -113,9 +108,7 @@ extension ContentViewController: LoadDataProtocol{
             loadDataImage()
         }
         
-        if dataList.count < 20{
-            loadPathImageServer()
-        }
+        if dataList.count < 20{ loadPathImageServer() }
     }
     
     func loadPathImageServer() {
@@ -123,9 +116,7 @@ extension ContentViewController: LoadDataProtocol{
             if data.count != 0{
                 self?.urlList += data
                 self?.loadDataImage()
-            }else{
-                Alert.errorServerAlert(on: self!)
-            }
+            }else{ Alert.errorServerAlert(on: self!) }
         }
     }
 
@@ -157,7 +148,5 @@ extension ContentViewController: GADInterstitialDelegate{
         return interstitial
     }
 
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-      interstitial = createAndLoadInterstitial()
-    }
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) { interstitial = createAndLoadInterstitial() }
 }

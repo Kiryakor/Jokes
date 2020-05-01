@@ -12,19 +12,15 @@ class AuthViewController: UIViewController {
 
     //MARK: Var
     private var welcomeLabel: UILabel!
-    
     private var emailLabel:UILabel!
     private var emailTextField:TextFieldBottonLine!
     private var emailStackView:UIStackView!
-    
     private var passwordLabel:UILabel!
     private var passwordTextField:TextFieldBottonLine!
     private var passwordStackView:UIStackView!
-    
     private var emailButton:UIButton!
     private var emailTap:UITapGestureRecognizer!
     private var buttonStackView:UIStackView!
-    
     private var mainStackView:UIStackView!
     
     //MARK: Lifecycle
@@ -54,7 +50,7 @@ class AuthViewController: UIViewController {
     }
 }
 
-//MARK: работа с клавиатурой и TextField
+//MARK: Работа с клавиатурой и TextField
 extension AuthViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
