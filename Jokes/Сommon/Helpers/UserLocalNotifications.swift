@@ -21,7 +21,7 @@ class UserLocalNotifications{
         }
     }
     
-    class func sendNotification() {
+    class func sendNotification(timeInterval:TimeInterval = 60*60*10) {
         let contentList:[String] = ["Дожили... Новая подборка мемов уже доступна для тебя",
                                     "Кура, булка, греча, поребрик... А у наc новая подберка мемов для тебя",
                                     "Вечер в ладу... у нас новости для тебя - заходи",
@@ -34,7 +34,7 @@ class UserLocalNotifications{
         content.body = contentList.randomElement()!
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         
         let request = UNNotificationRequest(identifier: userNotificationsReturn(identifier: .local) , content: content, trigger: trigger)
         

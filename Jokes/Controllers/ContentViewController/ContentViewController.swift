@@ -36,6 +36,9 @@ class ContentViewController: UIViewController,ContentCollectionView {
     @objc func sceneWillResignActiveNotification(_ notification: NSNotification){
         RealmHelpers.saveData(data: urlList, startIndex: maxViewedIndex)
         UserLocalNotifications.sendNotification()
+        UserLocalNotifications.sendNotification(timeInterval: 60*60*24)
+        UserLocalNotifications.sendNotification(timeInterval: 60*60*24*3)
+        UserLocalNotifications.sendNotification(timeInterval: 60*60*25*7)
     }
     
     @objc func sceneWillResignLongTapImage(_ notification: NSNotification){
